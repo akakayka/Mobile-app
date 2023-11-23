@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import { icons, COLORS }  from "./constants"
 
 export default function App() {
   return (
@@ -10,6 +11,16 @@ export default function App() {
         <Text>address</Text>
         <Text>address description</Text>
         <Text>time</Text>
+
+
+      </View>
+      <View>
+        <Image
+            source={icons.done}
+            style={{
+                marginTop: 150,
+            }}
+        />
       </View>
     </View>
   );
@@ -18,9 +29,9 @@ export default function App() {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: '#C8D0D4',
+    // backgroundColor: COLORS.lightGray4,
   },
   container: {
-    backgroundColor: '#FFFFFF',
+    // backgroundColor: COLORS.white,
   },
 });

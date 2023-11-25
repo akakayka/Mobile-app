@@ -1,4 +1,4 @@
 import icons from "./icons"
-import {COLORS} from "./colors";
+import appTheme from "./theme";
 
-export {icons, COLORS};
+export {icons, appTheme};

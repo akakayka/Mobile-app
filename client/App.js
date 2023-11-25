@@ -1,6 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import { icons, COLORS }  from "./constants"
+import { icons, appTheme }  from "./constants"
+import {BigButton} from "./src/ui/BigButton";
+import {SmallButton} from "./src/ui/SmallButton";
+
+const buttonProps = {
+    title: 'text',
+    accessibilityTitle: 'qwe',
+};
 
 export default function App() {
   return (
@@ -22,6 +29,13 @@ export default function App() {
             }}
         />
       </View>
+        <BigButton props={buttonProps}>
+
+        </BigButton>
+        <Text>  </Text>
+        <SmallButton props={buttonProps}>
+
+        </SmallButton>
     </View>
   );
 }
@@ -29,9 +43,10 @@ export default function App() {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    // backgroundColor: COLORS.lightGray4,
+    backgroundColor: appTheme.COLORS.lightGray4,
+      marginTop: 20,
   },
   container: {
-    // backgroundColor: COLORS.white,
+    backgroundColor: appTheme.COLORS.white,
   },
 });

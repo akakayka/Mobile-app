@@ -19,8 +19,10 @@ export const time = require("../assets/icons/time.png");
 export const warning = require("../assets/icons/warning.png");
 export const back = require("../assets/icons/back.png")
 export const dropdown = require("../assets/icons/dropdown.png")
+export const checkbox = require("../assets/icons/checkbox.png")
 
 export default {
+    checkbox,
     dropdown,
     back,
     arrow,

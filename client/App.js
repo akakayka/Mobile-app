@@ -1,8 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import { Image, StyleSheet, Text, View} from 'react-native';
 import { icons, appTheme }  from "./constants"
 import {BigButton} from "./src/ui/BigButton";
 import {SmallButton} from "./src/ui/SmallButton";
+import {SmallRoundButton} from "./src/ui/SmallRoundButton";
+import {BigRoundButton} from "./src/ui/BigRoundButton";
+import {Checkbox} from "./src/ui/Checkbox";
+import {COLORS} from "./constants/theme";
+import {Toggle} from "./src/ui/Toggle";
 
 const buttonProps = {
     title: 'text',
@@ -29,13 +34,17 @@ export default function App() {
             }}
         />
       </View>
-        <BigButton props={buttonProps}>
-
-        </BigButton>
+        <BigButton />
         <Text>  </Text>
-        <SmallButton props={buttonProps}>
-
-        </SmallButton>
+        <SmallRoundButton />
+        <Text>  </Text>
+        <BigRoundButton />
+        <Text>  </Text>
+        <SmallButton />
+        <Text>  </Text>
+        <Checkbox></Checkbox>
+        <Text>  </Text>
+        {/*<Toggle></Toggle>*/}
     </View>
   );
 }

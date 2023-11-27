@@ -8,11 +8,7 @@ import {BigRoundButton} from "./src/ui/BigRoundButton";
 import {Checkbox} from "./src/ui/Checkbox";
 import {COLORS} from "./constants/theme";
 import {Toggle} from "./src/ui/Toggle";
-
-const buttonProps = {
-    title: 'text',
-    accessibilityTitle: 'qwe',
-};
+import {InputField} from "./src/ui/InputField";
 
 export default function App() {
   return (
@@ -26,14 +22,6 @@ export default function App() {
 
 
       </View>
-      <View>
-        <Image
-            source={icons.done}
-            style={{
-                marginTop: 150,
-            }}
-        />
-      </View>
         <BigButton />
         <Text>  </Text>
         <SmallRoundButton />
@@ -44,7 +32,9 @@ export default function App() {
         <Text>  </Text>
         <Checkbox></Checkbox>
         <Text>  </Text>
-        {/*<Toggle></Toggle>*/}
+        <Toggle></Toggle>
+        <Text> </Text>
+        <InputField />
     </View>
   );
 }

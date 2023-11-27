@@ -1,47 +1,41 @@
-export const arrow = require("../assets/icons/arrow.png");
-export const close = require("../assets/icons/close.png");
-export const done = require("../assets/icons/done.png");
-export const exclamation = require("../assets/icons/exclamation.png");
-export const help = require("../assets/icons/help.png");
-export const home1 = require("../assets/icons/home1.png");
-export const home2 = require("../assets/icons/home2.png");
-export const list = require("../assets/icons/list.png");
-export const location = require("../assets/icons/location.png");
-export const map = require("../assets/icons/map.png");
-export const minus = require("../assets/icons/minus.png");
-export const phone = require("../assets/icons/phone.png");
-export const plus = require("../assets/icons/plus.png");
-export const profile = require("../assets/icons/profile.png");
-export const settings = require("../assets/icons/settings.png");
-export const star = require("../assets/icons/star.png");
-export const statistics = require("../assets/icons/statistics.png");
-export const time = require("../assets/icons/time.png");
-export const warning = require("../assets/icons/warning.png");
-export const back = require("../assets/icons/back.png")
-export const dropdown = require("../assets/icons/dropdown.png")
-export const checkbox = require("../assets/icons/checkbox.png")
+import ArrowIcon from "../assets/icons/Arrowicon";
+import BackIcon from "../assets/icons/BackIcon";
+import CloseIcon from "../assets/icons/CloseIcon";
+import DropdownIcon from "../assets/icons/DropwownIcon";
+import ExclamationIcon from "../assets/icons/ExclamationIcon";
+import HelpIcon from "../assets/icons/HelpIcon";
+import HomeIcon from "../assets/icons/HomeIcon";
+import ListIcon from "../assets/icons/ListIcon";
+import MapIcon from "../assets/icons/MapIcon";
+import MinusIcon from "../assets/icons/MinusIcon";
+import PhoneIcon from "../assets/icons/PhoneIcon";
+import PlusIcon from "../assets/icons/PlusIcon";
+import ProfileIcon from "../assets/icons/ProfileIcon";
+import SettingsIcon from "../assets/icons/SettingsIcon";
+import StarIcon from "../assets/icons/StarIcon";
+import StatisticsIcon from "../assets/icons/StatisticsIcon";
+import SuccessIcon from "../assets/icons/SuccessIcon";
+import TimeIcon from "../assets/icons/TimeIcon";
+import WalletIcon from "../assets/icons/WalletIcon";
 
 export default {
-    checkbox,
-    dropdown,
-    back,
-    arrow,
-    close,
-    done,
-    exclamation,
-    help,
-    home1,
-    home2,
-    list,
-    location,
-    map,
-    minus,
-    phone,
-    plus,
-    profile,
-    settings,
-    star,
-    statistics,
-    time,
-    warning,
+    ArrowIcon,
+    BackIcon,
+    CloseIcon,
+    DropdownIcon,
+    ExclamationIcon,
+    HelpIcon,
+    HomeIcon,
+    ListIcon,
+    MapIcon,
+    MinusIcon,
+    PhoneIcon,
+    PlusIcon,
+    ProfileIcon,
+    SettingsIcon,
+    StarIcon,
+    StatisticsIcon,
+    SuccessIcon,
+    TimeIcon,
+    WalletIcon,
 }

@@ -22,15 +22,14 @@ const styles = StyleSheet.create({
 })
 
 export const SmallRoundButton = (props) => {
+    const plusIcon = icons.PlusIcon;
+
     return (
         <View>
             <TouchableHighlight onPress={() => ('text')}>
                 <View style={styles.button}>
                     <View style={styles.container}>
-                        <Image
-                            source={icons.plus}
-                            style={styles.img}
-                        />
+                        {plusIcon}
                     </View>
                 </View>
             </TouchableHighlight>

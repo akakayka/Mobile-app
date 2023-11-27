@@ -26,7 +26,7 @@ export const BigButton = (props) => {
                 activeOpacity={1}
                 underlayColor={COLORS.red}
                 onPress={() => ('text')}
-                
+
             >
                 <View style={styles.button}>
                     <View style={styles.container}>

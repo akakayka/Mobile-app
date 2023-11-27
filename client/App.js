@@ -9,6 +9,9 @@ import {Checkbox} from "./src/ui/Checkbox";
 import {COLORS} from "./constants/theme";
 import {Toggle} from "./src/ui/Toggle";
 import {InputField} from "./src/ui/InputField";
+import PlusIcon from "./assets/icons/PlusIcon";
+import HomeIcon from "./assets/icons/HomeIcon";
+import HelpIcon from "./assets/icons/HelpIcon";
 
 export default function App() {
   return (
@@ -21,7 +24,9 @@ export default function App() {
         <Text>time</Text>
 
 
+
       </View>
+      <HelpIcon></HelpIcon>
         <BigButton />
         <Text>  </Text>
         <SmallRoundButton />

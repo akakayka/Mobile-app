@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Server.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('available-orders', OrdersView.as_view(), name='orders'),
+    path('update-status-order', UpdateOrder.as_view(), name='order_update'),
+    path('get-profile-info', DeliverymanStats.as_view(), name='profile_info'),
+    path('get-order-info', OrderView.as_view(), name='order_info'),
+    #path('update-status-order/<int:order_id>', UpdateOrder.as_view(), name='order_update'),
 ]

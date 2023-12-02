@@ -2,6 +2,7 @@ import React from 'react'
 import {Image, StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import {COLORS, SIZES} from "../../constants/theme";
 import {icons} from "../../constants";
+import PlusIcon from "../../assets/icons/PlusIcon";
 
 const styles = StyleSheet.create({
     container: {
@@ -18,7 +19,11 @@ const styles = StyleSheet.create({
     img: {
         height: 12,
         width: 12,
-    }
+    },
+    icon: {
+        height: 10,
+        width: 10,
+    },
 })
 
 export const SmallRoundButton = (props) => {
@@ -29,7 +34,10 @@ export const SmallRoundButton = (props) => {
             <TouchableHighlight onPress={() => ('text')}>
                 <View style={styles.button}>
                     <View style={styles.container}>
-                        {plusIcon}
+                        <PlusIcon
+                        style={styles.icon}>
+
+                        </PlusIcon>
                     </View>
                 </View>
             </TouchableHighlight>

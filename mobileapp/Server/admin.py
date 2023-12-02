@@ -4,5 +4,5 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 admin.site.register(Deliveryman)
-admin.site.register(DeliveryStatus)
+admin.site.register(OrderStatus)
 admin.site.register(Order)

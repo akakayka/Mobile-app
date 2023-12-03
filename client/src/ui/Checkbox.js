@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
-import {Image, StyleSheet, Text, View} from "react-native";
+import {, StyleSheet, View} from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {COLORS} from "../../constants/theme";
-import {icons} from "../../constants";
-import {checkbox} from "../../constants/icons";
+
 
 const styles = StyleSheet.create({
     container: {

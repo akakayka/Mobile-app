@@ -1,56 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View} from 'react-native';
 import { icons, appTheme }  from "./constants"
-import {BigButton} from "./src/ui/BigButton";
-import {SmallButton} from "./src/ui/SmallButton";
-import {SmallRoundButton} from "./src/ui/SmallRoundButton";
-import {BigRoundButton} from "./src/ui/BigRoundButton";
-import {Checkbox} from "./src/ui/Checkbox";
-import {COLORS} from "./constants/theme";
-import {Toggle} from "./src/ui/Toggle";
-import {InputField} from "./src/ui/InputField";
-import PlusIcon from "./assets/icons/PlusIcon";
-import HomeIcon from "./assets/icons/HomeIcon";
-import HelpIcon from "./assets/icons/HelpIcon";
+import {Order} from "./src/components/Order";
 
 export default function App() {
   return (
-    <View style={styles.main}>
       <View style={styles.container}>
-        <Text>Заказ №054</Text>
-        <Text>status</Text>
-        <Text>address</Text>
-        <Text>address description</Text>
-        <Text>time</Text>
-
-
-
-      </View>
-      <HelpIcon></HelpIcon>
-        <BigButton title={'Название кнопки'} />
-        <Text>  </Text>
-        <SmallRoundButton />
-        <Text>  </Text>
-        <BigRoundButton />
-        <Text>  </Text>
-        <SmallButton title={'Название кнопки'} />
-        <Text>  </Text>
-        <Checkbox></Checkbox>
-        <Text>  </Text>
-        <Toggle></Toggle>
         <Text> </Text>
-        <InputField />
-    </View>
+        <View style={styles.main}>
+
+          <Order></Order>
+          <Text></Text>
+          <Order></Order>
+          <Text></Text>
+          <Order></Order>
+
+        </View>
+        <Text></Text>
+      </View>
   );
 }
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
     backgroundColor: appTheme.COLORS.lightGray4,
       marginTop: 20,
   },
   container: {
-    backgroundColor: appTheme.COLORS.white,
+    backgroundColor: appTheme.COLORS.lightGray4,
   },
 });

@@ -27,13 +27,13 @@ export default function App() {
 
       </View>
       <HelpIcon></HelpIcon>
-        <BigButton />
+        <BigButton title={'Название кнопки'} />
         <Text>  </Text>
         <SmallRoundButton />
         <Text>  </Text>
         <BigRoundButton />
         <Text>  </Text>
-        <SmallButton />
+        <SmallButton title={'Название кнопки'} />
         <Text>  </Text>
         <Checkbox></Checkbox>
         <Text>  </Text>

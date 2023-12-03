@@ -27,8 +27,6 @@ const styles = StyleSheet.create({
 })
 
 export const SmallRoundButton = (props) => {
-    const plusIcon = icons.PlusIcon;
-
     return (
         <View>
             <TouchableHighlight onPress={() => ('text')}>

@@ -1,16 +1,12 @@
-import React from 'react'
-import {StyleSheet, Text, View} from "react-native";
+import * as React from 'react';
+import { View, Text } from 'react-native';
 
-const styles = StyleSheet.create({
-    container: {
-
-    },
-})
-
-export const MapPage = () => {
+export default function MapPage({ navigation }) {
     return (
-        <View>
-
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text
+                onPress={() => alert('This is the "Map" screen.')}
+                style={{ fontSize: 26, fontWeight: 'bold' }}>Map Screen</Text>
         </View>
-    )
+    );
 }

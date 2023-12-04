@@ -7,26 +7,14 @@ import {SmallButton} from "./src/ui/SmallButton";
 import {BigButton} from "./src/ui/BigButton";
 import {SmallRoundButton} from "./src/ui/SmallRoundButton";
 import {BigRoundButton} from "./src/ui/BigRoundButton";
+import {MainContainer} from "./src/screens/MainContainer";
+import {AuthorizationPage} from "./src/screens/AuthorizationPage";
 
 export default function App() {
   return (
       <View style={styles.container}>
-        <Text> </Text>
-        <View style={styles.main}>
-            <Comment
-                image={require('./assets/ExamplePhoto.png')}
-                text={'Пиццу у двери положите) ещё лифт кстати не работает. Хорошего дня! Здоровья, счастья, любви.'}
-            />
-        </View>
-        <Text></Text>
-          <Order></Order>
-          <Text></Text>
-          <Order></Order>
-          <Text></Text>
-          <SmallButton title={'Кнопка'} />
-          <BigButton title={'Кнопка'} />
-          <SmallRoundButton title={'Кнопка'} />
-          <BigRoundButton />
+          <MainContainer></MainContainer>
+          <StatusBar style={'auto'}></StatusBar>
       </View>
   );
 }
@@ -38,5 +26,6 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: appTheme.COLORS.lightGray4,
+      marginTop: 20,
   },
 });

@@ -44,9 +44,9 @@ export const MainContainer = () => {
                                 return <ListIcon />
                         }
                     },
-                    tabBarActiveTintColor: 'tomato',
-                    tabBarInactiveTintColor: 'red',
-                    tabBarStyle: {backgroundColor: '#F5B547', height: 60,
+                    tabBarStyle: {backgroundColor: '#F5B547', height: '10%',
+                        borderTopEndRadius: 16,
+                        borderTopLeftRadius: 16,
                         paddingTop: '12%',
                         paddingBottom: '12%',
                         paddingLeft: '4%',

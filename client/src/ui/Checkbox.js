@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {, StyleSheet, View} from "react-native";
+import { StyleSheet, View} from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {COLORS} from "../../constants/theme";
 

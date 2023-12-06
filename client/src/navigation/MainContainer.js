@@ -12,6 +12,7 @@ import MapPage from "./screens/MapPage";
 import OrderPage from "./screens/OrderPage";
 import OrdersPage from "./screens/OrdersPage";
 import {StyleSheet} from "react-native";
+import {COLORS} from "../../constants/theme";
 
 const homeName = "Home";
 const profileName = "Profile";
@@ -33,18 +34,18 @@ export const MainContainer = () => {
                     tabBarIcon: ({ focused, color, size }) => {
                         switch (route.name) {
                             case homeName:
-                                return <HomeIcon />
+                                return <HomeIcon color={COLORS.white}/>
                             case profileName:
-                                return <ProfileIcon />
+                                return <ProfileIcon color={COLORS.white}/>
                             case mapName:
-                                return <MapIcon />
+                                return <MapIcon color={COLORS.white}/>
                             case orderName:
-                                return <TimeIcon />
+                                return <TimeIcon color={COLORS.white}/>
                             case ordersName:
-                                return <ListIcon />
+                                return <ListIcon color={COLORS.white}/>
                         }
                     },
-                    tabBarStyle: {backgroundColor: '#F5B547', height: '10%',
+                    tabBarStyle: {backgroundColor: COLORS.primary, height: '10%',
                         borderTopEndRadius: 16,
                         borderTopLeftRadius: 16,
                         paddingTop: '12%',
@@ -64,15 +65,3 @@ export const MainContainer = () => {
         </NavigationContainer>
     )
 }
-
-const navStyles = StyleSheet.create({
-    navContainer: {
-        backgroundColor: '#F5B547',
-        justifyContent: "space-between",
-        height: '6,5%',
-        paddingTop: '12,5%',
-        paddingBottom: '12,5%',
-        paddingLeft: '4%',
-        paddingRight: '4%'
-    }
-})

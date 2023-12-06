@@ -15,11 +15,8 @@ const fonts = () => Font.loadAsync({
 function App() {
     const [isReady, setIsReady] = useState(false);
 
-
-
-
     return (
-        <AuthorizationPage></AuthorizationPage>
+        <MainContainer />
     );
 }
 

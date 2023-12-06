@@ -16,7 +16,7 @@ function App() {
     const [isReady, setIsReady] = useState(false);
 
     return (
-        <MainContainer />
+        <AuthorizationPage />
     );
 }
 

@@ -1,36 +1,44 @@
 import React, {useState} from 'react'
 import {SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
 import {BigButton} from "../../ui/BigButton";
-import {SmallRoundButton} from "../../ui/SmallRoundButton";
 import {InputField} from "../../ui/InputField";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
-import {COLORS, FONTS} from "../../../constants/theme";
+import {COLORS} from "../../../constants/theme";
 
 const styles = StyleSheet.create({
     container: {
-        width: '92%',
-        marginLeft: '4%',
-        marginRight: '4%',
-        justifyContent: "center"
+        width: '100%',
+        justifyContent: "center",
+        backgroundColor: COLORS.lightGray5,
+        paddingVertical: 80,
+        paddingHorizontal: 24,
     },
     mainTitle: {
         fontSize: 28,
         fontWeight: "bold",
-        marginBottom: 32
+        marginBottom: 32,
+        color: COLORS.black,
     },
     inputName: {
         fontSize: 16,
         marginBottom: 8,
+        color: COLORS.black,
     },
     inputContainer:{
-        paddingLeft: 8,
-        paddingRight: 8,
-        marginBottom: 24
+        marginBottom: 24,
     },
     afterText:{
 
+    },
+    button: {
+        flexDirection: "row",
+        justifyContent: "center",
+        marginBottom: 24,
+    },
+    text: {
+        fontSize: 16,
+        color: COLORS.lightGray2,
     }
-
 })
 
 
@@ -42,19 +50,25 @@ export const AuthorizationPage = () => {
                 Войдите в аккаунт
             </Text>
             <View style={styles.inputContainer}>
-            <Text style={styles.inputName}>
-                Логин
-            </Text>
-            <InputField></InputField>
+                <Text style={styles.inputName}>
+                    Логин
+                </Text>
+                <InputField
+                    placeholder={'Введите логин'}
+                />
             </View>
             <View style={styles.inputContainer}>
-            <Text style={styles.inputName}>
-                Пароль
-            </Text>
-            <InputField></InputField>
+                <Text style={styles.inputName}>
+                    Пароль
+                </Text>
+                <InputField
+                    placeholder={'Введите пароль'}
+                />
             </View>
-            <BigButton title={'Войти'}></BigButton>
-            <Text style={FONTS.body3}>Если Вы забыли пароль или логин, обратитесь к работодателю</Text>
+            <View style={styles.button}>
+                <BigButton title={'Войти в аккаунт'}></BigButton>
+            </View>
+            <Text style={styles.text}>Если Вы забыли пароль или логин, обратитесь к работодателю</Text>
 
 
         </SafeAreaView>

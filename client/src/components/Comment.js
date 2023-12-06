@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         marginBottom: 24,
     },
+
 })
 
 export const Comment = (props) => {

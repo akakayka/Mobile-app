@@ -6,11 +6,11 @@ import ProfileIcon from "../../assets/icons/ProfileIcon";
 import MapIcon from "../../assets/icons/MapIcon";
 import TimeIcon from "../../assets/icons/TimeIcon";
 import ListIcon from "../../assets/icons/ListIcon";
-import HomePage from "./HomePage";
-import ProfilePage from "./ProfilePage";
-import MapPage from "./MapPage";
-import OrderPage from "./OrderPage";
-import OrdersPage from "./OrdersPage";
+import HomePage from "./screens/HomePage";
+import ProfilePage from "./screens/ProfilePage";
+import MapPage from "./screens/MapPage";
+import OrderPage from "./screens/OrderPage";
+import OrdersPage from "./screens/OrdersPage";
 import {StyleSheet} from "react-native";
 
 const homeName = "Home";
@@ -21,16 +21,15 @@ const ordersName = "Orders"
 
 const Tab = createBottomTabNavigator();
 
-const styles = StyleSheet.create({
-    marginTop: 50,
-})
+
 
 export const MainContainer = () => {
     return (
-        <NavigationContainer>
+        <NavigationContainer >
             <Tab.Navigator
                 initialRouteName={homeName}
-                screenOptions={({ route }) => ({
+                screenOptions={({ route }) =>
+                     ({
                     tabBarIcon: ({ focused, color, size }) => {
                         switch (route.name) {
                             case homeName:
@@ -45,7 +44,15 @@ export const MainContainer = () => {
                                 return <ListIcon />
                         }
                     },
+                    tabBarActiveTintColor: 'tomato',
+                    tabBarInactiveTintColor: 'red',
+                    tabBarStyle: {backgroundColor: '#F5B547', height: 60,
+                        paddingTop: '12%',
+                        paddingBottom: '12%',
+                        paddingLeft: '4%',
+                        paddingRight: '4%'}
                 })}
+
             >
                 <Tab.Screen name={homeName} component={HomePage} />
                 <Tab.Screen name={orderName} component={OrderPage} />
@@ -57,3 +64,15 @@ export const MainContainer = () => {
         </NavigationContainer>
     )
 }
+
+const navStyles = StyleSheet.create({
+    navContainer: {
+        backgroundColor: '#F5B547',
+        justifyContent: "space-between",
+        height: '6,5%',
+        paddingTop: '12,5%',
+        paddingBottom: '12,5%',
+        paddingLeft: '4%',
+        paddingRight: '4%'
+    }
+})

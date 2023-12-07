@@ -59,7 +59,7 @@ export const Order = (props) => {
         <View style={{...styles.mainContainer, ...props.style}}>
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.title}>Заказ № 054</Text>
+                    <Text style={styles.title}>Заказ № {props.data.number}</Text>
                     <View style={styles.addressBlock}>
                         <LocationIcon
                             style={styles.icon}
@@ -67,16 +67,16 @@ export const Order = (props) => {
                             height={24}
                             color={COLORS.primary}
                         />
-                        <Text style={styles.address}>Комсомольская 70</Text>
+                        <Text style={styles.address}>{props.data.address}</Text>
                     </View>
-                    <Text style={styles.distance}>3 км</Text>
+                    <Text style={styles.distance}>{props.data.distance} км</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <SmallRoundButton />
                 </View>
             </View>
             <View style={styles.infoBlock}>
-                <Text style={styles.text}>Принят 16:20</Text>
+                <Text style={styles.text}>Принят {props.data.timeFrom}</Text>
                 <View style={styles.info}>
                     <AttentionIcon
                         style={styles.attention}
@@ -84,7 +84,7 @@ export const Order = (props) => {
                         height={18}
                         color={COLORS.lightGray2}
                     />
-                    <Text style={styles.text}>Доставить до 18:59</Text>
+                    <Text style={styles.text}>Доставить до {props.data.timeTo}</Text>
                 </View>
             </View>
         </View>

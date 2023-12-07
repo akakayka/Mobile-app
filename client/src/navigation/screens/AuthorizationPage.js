@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 
 
 
-export const AuthorizationPage = () => {
+export const AuthorizationPage = (props) => {
     return (
         <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container]}>
             <Text style={styles.mainTitle}>
@@ -66,7 +66,7 @@ export const AuthorizationPage = () => {
                 />
             </View>
             <View style={styles.button}>
-                <BigButton title={'Войти в аккаунт'}></BigButton>
+                <BigButton title={'Войти в аккаунт'} onPress={props.onPress}></BigButton>
             </View>
             <Text style={styles.text}>Если Вы забыли пароль или логин, обратитесь к работодателю</Text>
 

@@ -25,7 +25,7 @@ export const BigButton = (props) => {
     return (
         <View style={styles.container}>
             <Pressable
-                onPress={() => {}}
+                onPress={props.onPress}
                 style={({pressed}) => [
                     {
                         backgroundColor: pressed ? COLORS.red : COLORS.primary,

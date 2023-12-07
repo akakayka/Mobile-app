@@ -23,32 +23,36 @@ const Tab = createBottomTabNavigator();
 
 export const MainContainer = () => {
     return (
-        <NavigationContainer >
+        <NavigationContainer>
             <Tab.Navigator
-                initialRouteName={homeName}
                 screenOptions={({ route }) =>
                      ({
-                    tabBarIcon: ({ focused, color, size }) => {
-                        switch (route.name) {
-                            case homeName:
-                                return <HomeIcon color={COLORS.white}/>
-                            case profileName:
-                                return <ProfileIcon color={COLORS.white}/>
-                            case mapName:
-                                return <MapIcon color={COLORS.white}/>
-                            case orderName:
-                                return <TimeIcon color={COLORS.white}/>
-                            case ordersName:
-                                return <ListIcon color={COLORS.white}/>
-                        }
-                    },
-                    tabBarStyle: {backgroundColor: COLORS.primary, height: '10%',
-                        borderTopEndRadius: 16,
-                        borderTopLeftRadius: 16,
-                        paddingTop: '12%',
-                        paddingBottom: '12%',
-                        paddingLeft: '4%',
-                        paddingRight: '4%'}
+                        tabBarIcon: ({ focused, color, size }) => {
+                            switch (route.name) {
+                                case homeName:
+                                    return <HomeIcon color={COLORS.white}/>
+                                case profileName:
+                                    return <ProfileIcon color={COLORS.white}/>
+                                case mapName:
+                                    return <MapIcon color={COLORS.white}/>
+                                case orderName:
+                                    return <TimeIcon color={COLORS.white}/>
+                                case ordersName:
+                                    return <ListIcon color={COLORS.white}/>
+                            }
+                        },
+                        tabBarStyle: {
+                            backgroundColor: COLORS.primary, height: '10%',
+                            borderTopEndRadius: 16,
+                            borderTopLeftRadius: 16,
+                            paddingTop: '10%',
+                            paddingBottom: '10%',
+                            paddingLeft: '4%',
+                            paddingRight: '4%'
+                        },
+                         tabBarShowLabel: false,
+                         tabBarHideOnKeyboard: true,
+                         header: () => false
                 })}
 
             >

@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
     button: {
         borderRadius: 16,
         height: 35,
-        width: 249,
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "row",
+        paddingHorizontal: 24,
     },
     text: {
         fontSize: 16,

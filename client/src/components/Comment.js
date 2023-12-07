@@ -7,7 +7,7 @@ import {COLORS} from "../../constants/theme";
 const styles = StyleSheet.create({
     container: {
         backgroundColor: COLORS.white,
-        width: 312,
+        width: '100%',
         borderRadius: 16,
         padding: 16,
     },
@@ -40,7 +40,10 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         marginBottom: 24,
     },
-
+    button: {
+        flexDirection: "row",
+        justifyContent: "center",
+    }
 })
 
 export const Comment = (props) => {
@@ -54,18 +57,20 @@ export const Comment = (props) => {
                     <Image source={props.image} />
                 </View>
                 <View style={styles.userData}>
-                    <Text style={styles.name}>Елизавета</Text>
-                    <Text style={styles.phone}>+7 950 228-13-37</Text>
+                    <Text style={styles.name}>{props.name}</Text>
+                    <Text style={styles.phone}>{props.phone}</Text>
                 </View>
             </View>
             <View>
                 {props.text ? <Text style={styles.title}>Комментарий</Text> : ''}
                 <Text style={styles.text}>{props.text ? props.text : 'Комментарий отсутствует'}</Text>
             </View>
-            <SmallButton
-                title={'Позвонить покупателю'}
-                onPress={onPress}
-            />
+            <View style={styles.button}>
+                <SmallButton
+                    title={'Позвонить покупателю'}
+                    onPress={onPress}
+                />
+            </View>
         </View>
     )
 }

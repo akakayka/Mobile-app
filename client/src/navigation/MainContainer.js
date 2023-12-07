@@ -11,7 +11,6 @@ import ProfilePage from "./screens/ProfilePage";
 import MapPage from "./screens/MapPage";
 import OrderPage from "./screens/OrderPage";
 import OrdersPage from "./screens/OrdersPage";
-import {StyleSheet} from "react-native";
 import {COLORS} from "../../constants/theme";
 
 const homeName = "Home";
@@ -21,8 +20,6 @@ const orderName = "Order"
 const ordersName = "Orders"
 
 const Tab = createBottomTabNavigator();
-
-
 
 export const MainContainer = () => {
     return (

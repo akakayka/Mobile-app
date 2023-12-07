@@ -36,7 +36,7 @@ function App() {
     }
 
     return (
-        isAuth ? <MainContainer />: <AuthorizationPage onPress={onPress}/>
+        isAuth ? <MainContainer /> : <AuthorizationPage onPress={onPress}/>
     );
 }
 

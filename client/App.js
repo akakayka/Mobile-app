@@ -1,56 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View} from 'react-native';
-import { icons, appTheme }  from "./constants"
-import {BigButton} from "./src/ui/BigButton";
-import {SmallButton} from "./src/ui/SmallButton";
-import {SmallRoundButton} from "./src/ui/SmallRoundButton";
-import {BigRoundButton} from "./src/ui/BigRoundButton";
-import {Checkbox} from "./src/ui/Checkbox";
-import {COLORS} from "./constants/theme";
-import {Toggle} from "./src/ui/Toggle";
-import {InputField} from "./src/ui/InputField";
-import PlusIcon from "./assets/icons/PlusIcon";
-import HomeIcon from "./assets/icons/HomeIcon";
-import HelpIcon from "./assets/icons/HelpIcon";
+import * as React from "react";
+import {MainContainer} from "./src/navigation/MainContainer";
+import {AuthorizationPage} from "./src/navigation/screens/AuthorizationPage";
+import * as Font from 'expo-font';
+import {useState} from "react";
 
-export default function App() {
-  return (
-    <View style={styles.main}>
-      <View style={styles.container}>
-        <Text>Заказ №054</Text>
-        <Text>status</Text>
-        <Text>address</Text>
-        <Text>address description</Text>
-        <Text>time</Text>
+const fonts = () => Font.loadAsync({
+    'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
+    'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf')
+})
 
 
+function App() {
+    const [isReady, setIsReady] = useState(false);
+    const [isAuth, setIsAuth] = useState(false)
 
-      </View>
-      <HelpIcon></HelpIcon>
-        <BigButton />
-        <Text>  </Text>
-        <SmallRoundButton />
-        <Text>  </Text>
-        <BigRoundButton />
-        <Text>  </Text>
-        <SmallButton />
-        <Text>  </Text>
-        <Checkbox></Checkbox>
-        <Text>  </Text>
-        <Toggle></Toggle>
-        <Text> </Text>
-        <InputField />
-    </View>
-  );
+    const data = [
+        {
+            number: '054',
+            address: 'Комсомольская 70',
+            distance: '3',
+            timeFrom: '16:20',
+            timeTo: '18:59'
+        },
+        {
+            number: '134',
+            address: 'Ленина 128',
+            distance: '0.8',
+            timeFrom: '17:34',
+            timeTo: '18:59'
+        }
+    ]
+
+    const onPress = () => {
+        setIsAuth(!isAuth)
+    }
+
+    return (
+        isAuth ? <MainContainer /> : <AuthorizationPage onPress={onPress}/>
+    );
 }
 
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: appTheme.COLORS.lightGray4,
-      marginTop: 20,
-  },
-  container: {
-    backgroundColor: appTheme.COLORS.white,
-  },
-});
+export default App;

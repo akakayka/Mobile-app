@@ -1,38 +1,40 @@
 import React from 'react'
-import {Image, StyleSheet, Text, TouchableHighlight, View} from "react-native";
-import {COLORS, SIZES} from "../../constants/theme";
-import {icons} from "../../constants";
+import {Pressable, StyleSheet, View} from "react-native";
+import {COLORS} from "../../constants/theme";
+import PlusIcon from "../../assets/icons/PlusIcon";
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-    },
     button: {
         borderRadius: 64,
-        backgroundColor: COLORS.primary,
-        height: 24,
-        width: 24,
+        height: 48,
+        width: 48,
         alignItems: "center",
         justifyContent: "center",
     },
     img: {
         height: 12,
         width: 12,
-    }
+    },
 })
 
 export const SmallRoundButton = (props) => {
-    const plusIcon = icons.PlusIcon;
-
     return (
         <View>
-            <TouchableHighlight onPress={() => ('text')}>
-                <View style={styles.button}>
-                    <View style={styles.container}>
-                        {plusIcon}
-                    </View>
-                </View>
-            </TouchableHighlight>
+            <Pressable
+                onPress={() => ('text')}
+                style={
+                    ({pressed}) => [{
+                        backgroundColor: props.disabled ? COLORS.lightGray4 : pressed ? COLORS.red : COLORS.primary,
+                    },
+                    styles.button]
+                }
+            >
+                <PlusIcon
+                    height={24}
+                    width={24}
+                    color={COLORS.white}
+                ></PlusIcon>
+            </Pressable>
         </View>
     )
 }

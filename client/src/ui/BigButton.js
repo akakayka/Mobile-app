@@ -1,8 +1,6 @@
 import React from 'react'
-import {Image, StyleSheet, Text, TouchableHighlight, View} from "react-native";
-import {Button} from 'react-native'
+import {StyleSheet, Text, View, Pressable} from "react-native";
 import {COLORS, SIZES} from "../../constants/theme";
-import {icons} from "../../constants";
 
 const styles = StyleSheet.create({
     container: {
@@ -11,29 +9,31 @@ const styles = StyleSheet.create({
     },
     button: {
         borderRadius: 16,
-        backgroundColor: COLORS.primary,
         height: 51,
-        width: 195,
         alignItems: "center",
         justifyContent: "center",
+        paddingHorizontal: 32,
+    },
+    text: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: COLORS.white,
     },
 })
 
 export const BigButton = (props) => {
     return (
         <View style={styles.container}>
-            <TouchableHighlight
-                activeOpacity={1}
-                underlayColor={COLORS.red}
-                onPress={() => ('text')}
-
-            >
-                <View style={styles.button}>
-                    <View style={styles.container}>
-                        <Text>Big Button</Text>
-                    </View>
-                </View>
-            </TouchableHighlight>
+            <Pressable
+                onPress={props.onPress}
+                style={({pressed}) => [
+                    {
+                        backgroundColor: pressed ? COLORS.red : COLORS.primary,
+                    },
+                    styles.button,
+                ]}>
+                    <Text style={styles.text}>{props.title}</Text>
+            </Pressable>
         </View>
     )
 }

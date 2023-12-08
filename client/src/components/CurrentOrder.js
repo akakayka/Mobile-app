@@ -2,15 +2,13 @@ import React from 'react'
 import {StyleSheet, Text, View} from "react-native";
 import LocationIcon from "../../assets/icons/LocationIcon";
 import {COLORS} from "../../constants/theme";
-import AttentionIcon from "../../assets/icons/AttentionIcon";
-import {SmallRoundButton} from "../ui/SmallRoundButton";
 
 const styles = StyleSheet.create({
     mainContainer: {
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.primary,
         borderRadius: 16,
         padding: 16,
-        width: 312,
+        width: '100%',
     },
     container: {
         flexDirection: "row",
@@ -21,7 +19,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     title: {
-        color: COLORS.lightGray,
+        color: COLORS.white,
         marginBottom: 8,
     },
     addressBlock: {
@@ -33,9 +31,11 @@ const styles = StyleSheet.create({
     },
     address: {
         fontSize: 20,
+        color: COLORS.white,
+        fontWeight: "bold",
     },
     distance: {
-        color: COLORS.lightGray,
+        color: COLORS.white,
         marginLeft: 34,
         marginBottom: 8,
     },
@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     text: {
-        color: COLORS.lightGray2,
+        color: COLORS.white,
     }
 })
 
-export const Order = (props) => {
+export const CurrentOrder = (props) => {
     return (
         <View style={{...styles.mainContainer, ...props.style}}>
             <View style={styles.container}>
@@ -65,27 +65,15 @@ export const Order = (props) => {
                             style={styles.icon}
                             width={24}
                             height={24}
-                            color={COLORS.primary}
+                            color={COLORS.white}
                         />
                         <Text style={styles.address}>{props.data.address}</Text>
                     </View>
                     <Text style={styles.distance}>{props.data.distance} км</Text>
                 </View>
-                <View style={styles.buttonContainer}>
-                    <SmallRoundButton />
-                </View>
             </View>
             <View style={styles.infoBlock}>
-                <Text style={styles.text}>Принят {props.data.timeFrom}</Text>
-                <View style={styles.info}>
-                    <AttentionIcon
-                        style={styles.attention}
-                        width={18}
-                        height={18}
-                        color={COLORS.lightGray2}
-                    />
-                    <Text style={styles.text}>Доставить до {props.data.timeTo}</Text>
-                </View>
+                <Text style={styles.text}> Взят {props.data.timeFrom}</Text>
             </View>
         </View>
     )

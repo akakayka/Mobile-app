@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, TextInput} from 'react-native';
 import {COLORS} from "../../constants/theme";
 
-export const InputField = () => {
+export const InputField = (props) => {
     const [text, onChangeText] = useState('');
     const [borderStyle, onChangeBorder] = useState({
         borderColor: COLORS.lightGray,
@@ -12,7 +12,6 @@ export const InputField = () => {
     const styles = StyleSheet.create({
         input: {
             height: 51,
-            margin: 12,
             fontSize: 16,
             borderWidth: borderStyle.borderWidth,
             borderColor: borderStyle.borderColor,
@@ -45,7 +44,7 @@ export const InputField = () => {
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeText}
-                placeholder={'Input'}
+                placeholder={props.placeholder}
                 placeholderTextColor={COLORS.lightGray3}
                 value={text}
                 focusable={true}

@@ -24,5 +24,5 @@ urlpatterns = [
     path('update-status-order', UpdateOrder.as_view(), name='order_update'),
     path('get-profile-info', DeliverymanStats.as_view(), name='profile_info'),
     path('get-order-info', OrderView.as_view(), name='order_info'),
-    #path('update-status-order/<int:order_id>', UpdateOrder.as_view(), name='order_update'),
+    path('login', Login.as_view(), name='login')
 ]

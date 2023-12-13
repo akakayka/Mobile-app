@@ -1,6 +1,7 @@
 import React from 'react'
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View, FlatList} from "react-native";
 import {Order} from "./Order";
+import {render} from "react-native-web";
 
 const styles = StyleSheet.create({
     container: {
@@ -8,21 +9,15 @@ const styles = StyleSheet.create({
     },
 })
 
-export const OrderList = (props) => {
 
-    const list = props.data;
 
-    renderItem = (item) => (
-        <View>
-            <Order
-                data={item}
-            />
-        </View>
-    )
 
+export const OrderList = (props) =>
+{
     return (
         <View>
-            {list.map((item) => this.renderItem(item))}
+
+            <FlatList data={props.data} renderItem={({item}) => (<Order data={item}/>)}/>
         </View>
     )
 }

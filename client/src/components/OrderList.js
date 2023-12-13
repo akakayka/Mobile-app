@@ -15,8 +15,7 @@ const styles = StyleSheet.create({
 export const OrderList = (props) =>
 {
     return (
-        <View>
-
+        <View style={props.style}>
             <FlatList data={props.data} renderItem={({item}) => (<Order data={item}/>)}/>
         </View>
     )

@@ -9,8 +9,10 @@ const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: COLORS.white,
         borderRadius: 16,
-        padding: 16,
-        width: 312,
+        padding: '5%',
+        paddingRight: '5%',
+        width: "100%",
+        marginBottom: 16,
     },
     container: {
         flexDirection: "row",

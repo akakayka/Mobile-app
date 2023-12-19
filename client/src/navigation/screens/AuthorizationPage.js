@@ -44,9 +44,45 @@ const styles = StyleSheet.create({
 
 
 
+
+
 export const AuthorizationPage = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [borderStyle, onChangeBorder] = useState({
+        borderColor: COLORS.lightGray,
+        borderWidth: 0,
+    })
+
+    const styles_input = StyleSheet.create({
+        input: {
+            height: 51,
+            fontSize: 16,
+            borderWidth: borderStyle.borderWidth,
+            borderColor: borderStyle.borderColor,
+            padding: 10,
+            borderRadius: 16,
+            backgroundColor: COLORS.white,
+            alignItems: "flex-start",
+            paddingHorizontal: 15,
+            paddingVertical: 0,
+            color: COLORS.lightGray,
+        },
+    });
+
+    const onFocus = () => {
+        onChangeBorder({
+            borderColor: COLORS.primary,
+            borderWidth: 2,
+        })
+    }
+
+    const onBlur = () => {
+        onChangeBorder({
+            borderColor: COLORS.lightGray,
+            borderWidth: 0,
+        })
+    }
 
     const handleLogin = () => {
         try {
@@ -63,49 +99,41 @@ export const AuthorizationPage = (props) => {
             headers.append('Access-Control-Allow-Credentials', 'true');
             headers.append('Cross-Origin-Opener-Policy', 'same-origin');
             const request = new XMLHttpRequest();
-            request.onreadystatechange = e => {
-                console.log(request);
-                if (request.readyState !== 4) {
-                    return;
-                }
+            // request.onreadystatechange = e => {
+            //     console.log(request);
+            //     if (request.readyState !== 4) {
+            //         return;
+            //     }
+            //
+            //     if (request.status === 200) {
+            //         console.log('success', request.responseText);
+            //     } else {
+            //         console.warn('error');
+            //     }
+            // };
 
-                if (request.status === 200) {
-                    console.log('success', request.responseText);
-                } else {
-                    console.warn('error');
-                }
-            };
+            request.open('GET', `http://127.0.0.1:8000/login?username=${username}&password=${password}`);
 
-            request.open('GET', 'http://localhost:8000/login?username=1111&password=2222');
-            // request.setRequestHeader('mode', 'no-cors')
-            // request.setRequestHeader('Access-Control-Allow-Origin', '*')
-            // request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-            // request.setRequestHeader('Access-Control-Allow-Methods', 'GET')
-            // request.setRequestHeader('Access-Control-Allow-Credentials', 'true')
-            //request.withCredentials = true;
             request.send();
+            let data;
+            console.log(request)
 
-            fetch('http://localhost:8000/login?username=1111&password=2222',{
-                 method: 'GET',
-                 mode: 'no-cors',
-                 //credentials: 'include'
-            }).then((response) => {
-                console.log(response);
-            });
-            //const response = await fetch('http://localhost:8000/login?username=1111&password=2222')
+            request.onreadystatechange = () => {
+                let data = request.responseText;
 
-            let data = '0';
+
             if (data==='1') {
                 // Успешная аутентификация, сохраните токен в AsyncStorage или другом хранилище
-                console.log('ХУУУУУУУУУУУУУУУУУУУУЙ');
                 props.onPress();
-            } else {
+            } else if(data==='0' || data==='-1') {
                 // Ошибка аутентификации, вы можете показать сообщение об ошибке
                 alert(data.error || 'Ошибка аутентификации');
             }
-        } catch (error) {
-            console.error('Ошибка запроса:', error);
-        }
+            }
+            }
+            catch (error) {
+                console.error('Ошибка запроса:', error);
+            }
     };
 
     return (
@@ -117,18 +145,30 @@ export const AuthorizationPage = (props) => {
                 <Text style={styles.inputName}>
                     Логин
                 </Text>
-                <InputField
+                <TextInput
+                    style={styles_input.input}
                     onChangeText={(text) => setUsername(text)}
-                    placeholder={'Введите логин'}
+                    placeholder={"Введите логин"}
+                    placeholderTextColor={COLORS.lightGray3}
+                    value={username}
+                    focusable={true}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
                 />
             </View>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputName}>
                     Пароль
                 </Text>
-                <InputField
+                <TextInput
+                    style={styles_input.input}
                     onChangeText={(text) => setPassword(text)}
-                    placeholder={'Введите пароль'}
+                    placeholder={"Введите пароль"}
+                    placeholderTextColor={COLORS.lightGray3}
+                    value={password}
+                    focusable={true}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
                 />
             </View>
             <View style={styles.button}>

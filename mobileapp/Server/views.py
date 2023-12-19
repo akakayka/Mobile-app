@@ -64,13 +64,13 @@ class Login(View):
             if username == deliveryMan.login:
                 if password == deliveryMan.password:
                     print(1)
-                    return HttpResponse('21', headers=headers)
+                    return HttpResponse('1', headers=headers)
                 else:
                     print(0)
 
-                    return HttpResponse('20', headers=headers)
+                    return HttpResponse('0', headers=headers)
         print(-1)
 
-        return HttpResponse('21', headers=headers)
+        return HttpResponse('-1', headers=headers)
 
             # http://127.0.0.1:8000/login?username=aaa&password=123

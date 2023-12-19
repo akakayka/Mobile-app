@@ -52,16 +52,25 @@ class DeliverymanStats(View):
         # http://127.0.0.1:8000/get-profile-info?id=123
 
 class Login(View):
+
     def get(self, request):
+        #return HttpResponse('24')
         username = request.GET.get('username')
         password = request.GET.get('password')
+        headers = {'Access-Control-Allow-Origin': '*',
+                   'Access-Control-Allow-Methods': 'GET, OPTIONS, POST',
+                   'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'}
         for deliveryMan in Worker.objects.filter(login=username):
             if username == deliveryMan.login:
                 if password == deliveryMan.password:
-                    return HttpResponse('1')
+                    print(1)
+                    return HttpResponse('21', headers=headers)
                 else:
-                    return HttpResponse('0')
+                    print(0)
 
-        return HttpResponse('-1')
+                    return HttpResponse('20', headers=headers)
+        print(-1)
+
+        return HttpResponse('21', headers=headers)
 
             # http://127.0.0.1:8000/login?username=aaa&password=123

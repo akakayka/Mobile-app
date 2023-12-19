@@ -11,7 +11,7 @@ class Deliveryman(models.Model):
     patronymic = models.CharField(max_length=20, verbose_name="Отчество", blank=True)
     statistic = models.ForeignKey('Stats', on_delete=models.PROTECT, verbose_name="Статистика",blank=True, null=True)
     profile = models.ForeignKey('Worker', on_delete=models.CASCADE, verbose_name="Профиль",blank=True, null=True)
-    photo = models.ImageField(upload_to=user_directory_path, blank=True, verbose_name="Фото")
+    #photo = models.ImageField(upload_to=user_directory_path, blank=True, verbose_name="Фото")
     def save(self):
         a = Stats()
         a.save()

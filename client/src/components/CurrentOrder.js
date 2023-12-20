@@ -69,7 +69,7 @@ export const CurrentOrder = (props) => {
                         />
                         <Text style={styles.address}>{props.data.address}</Text>
                     </View>
-                    <Text style={styles.distance}>{props.data.distance} км</Text>
+                    <Text style={styles.distance}>{props.data.distance}</Text>
                 </View>
             </View>
             <View style={styles.infoBlock}>

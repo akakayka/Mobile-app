@@ -16,7 +16,11 @@ export const OrderList = (props) =>
 {
     return (
         <View style={props.style}>
-            <FlatList data={props.data} renderItem={({item}) => (<Order data={item}/>)}/>
+            <FlatList
+                data={props.data}
+                scrollEnabled={props.scroll}
+                renderItem={({item}) => (<Order data={item}/>)}
+            />
         </View>
     )
 }

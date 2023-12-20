@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.lightGray5,
         paddingVertical: 80,
         paddingHorizontal: 24,
+        marginTop: 20,
     },
     header: {
         fontSize: 24,
@@ -71,7 +72,10 @@ export default function OrdersPage({ navigation }) {
         <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container] }>
             <Text style={styles.header}>Доступные заказы</Text>
             <Text style={styles.desc}>Всего доступно {data.length} заказа</Text>
-            <OrderList data ={data}>
+            <OrderList
+                data={data}
+                scroll={true}
+            >
 
             </OrderList>
         </SafeAreaView>

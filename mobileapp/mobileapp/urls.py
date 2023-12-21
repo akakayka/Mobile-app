@@ -24,5 +24,6 @@ urlpatterns = [
     path('update-status-order', UpdateOrder.as_view(), name='order_update'),
     path('get-profile-info', DeliverymanStats.as_view(), name='profile_info'),
     path('get-order-info', OrderView.as_view(), name='order_info'),
-    path('login', Login.as_view(), name='login')
+    path('login', Login.as_view(), name='login'),
+    path('set-deliveryman', SetDeliveryman.as_view(), name='set_deliveryman')
 ]

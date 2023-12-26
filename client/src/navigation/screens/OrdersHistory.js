@@ -29,7 +29,7 @@ export const OrdersHistory = ({navigation}, props) => {
         orderList: {
             marginTop: 56,
             marginBottom: 20,
-            height: '80%'
+            height: '87%'
         }
     })
 

@@ -130,7 +130,7 @@ export const Settings = ({navigation}, props) => {
     }
 
     const goBack = () => {
-        navigation.navigate('Profile')
+        navigation.navigate('Back')
     }
 
     return (

@@ -12,6 +12,7 @@ import MapPage from "./screens/MapPage";
 import OrderPage from "./screens/OrderPage";
 import OrdersPage from "./screens/OrdersPage";
 import {COLORS} from "../../constants/theme";
+import {ProfileContainer} from "./ProfileContainer";
 
 const homeName = "Home";
 const profileName = "Profile";
@@ -61,7 +62,7 @@ export const MainContainer = () => {
                 <Tab.Screen name={orderName} component={OrderPage} />
                 <Tab.Screen name={mapName} component={MapPage} />
                 <Tab.Screen name={ordersName} component={OrdersPage} />
-                <Tab.Screen name={profileName} component={ProfilePage} />
+                <Tab.Screen name={profileName} component={ProfileContainer} />
 
             </Tab.Navigator>
         </NavigationContainer>

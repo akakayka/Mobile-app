@@ -7,6 +7,7 @@ import ListIcon from "../../../assets/icons/ListIcon";
 import StatisticsIcon from "../../../assets/icons/StatisticsIcon";
 import SettingsIcon from "../../../assets/icons/SettingsIcon";
 import ArrowIcon from "../../../assets/icons/Arrowicon";
+import {useDeliverymanContext} from "../../../UserContext";
 
 const styles = StyleSheet.create({
     container: {
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
 })
 
 export default function ProfilePage({ navigation }) {
+    const { userInfo, setUserInfo } = useDeliverymanContext();
     return (
         <SafeAreaView style={[SafeAreaViewAndroid.AndroidSafeArea, styles.container]}>
             <Text style={styles.header}>
@@ -70,7 +72,7 @@ export default function ProfilePage({ navigation }) {
             </Text>
             <View style={styles.profileData}>
                 <Text style={styles.name}>
-                    Обабков Тимур Валерьевич
+                    {userInfo.name} {userInfo.sur_name} {userInfo.patronymic}
                 </Text>
                 <View style={styles.rating}>
                     <StarIcon

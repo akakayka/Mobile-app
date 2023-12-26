@@ -21,6 +21,8 @@ class OrdersView(View):
 class OrderView(View):
     def get(self, request):
         order_id = request.GET.get('id')
+        print(order_id)
+        print("="*50)
         order = Order.objects.get(id=int(order_id))
         data = serializers.serialize('json', [order])
         return HttpResponse(data[1:-1], content_type='application/json', headers=headers)
@@ -43,6 +45,10 @@ class SetDeliveryman(View):
         id_deliveryman = request.GET.get('id_deliveryman')
         obj = Deliveryman.objects.all().get(id=id_deliveryman)
         order = Order.objects.all().get(id=id_order)
+        for cur_order in Order.objects.all():
+            if cur_order.deliveryman_id:
+                if cur_order.deliveryman_id.pk == obj.pk:
+                    return HttpResponse(-2, content_type='application/json', headers=headers)
         if order.deliveryman_id:
             return HttpResponse(-1, content_type='application/json', headers=headers)
         order.deliveryman_id=obj
@@ -50,15 +56,17 @@ class SetDeliveryman(View):
         return HttpResponse(1, content_type='application/json', headers=headers)
         #http://127.0.0.1:8000/set-deliveryman?id_order=123&id_deliveryman=123
 
-
 class DeliverymanStats(View):
     def get(self, request):
         user_id = request.GET.get('id')
         obj = Deliveryman.objects.all().get(id=user_id)
-        stat = model_to_dict(obj.statistic)
+        order = -1
+        for cur_order in Order.objects.all():
+            if cur_order.deliveryman_id:
+                if cur_order.deliveryman_id.pk == obj.pk:
+                    order = cur_order.pk
         obj=model_to_dict(obj)
-        del obj['id'], stat['id'], obj['photo']
-        data = dict(list(obj.items()) + list(stat.items()))
+        data = dict(list(obj.items())+ [('order',order)])
         data = json.dumps(data)
         return HttpResponse(data, content_type='application/json', headers=headers)
         # http://127.0.0.1:8000/get-profile-info?id=123
@@ -73,9 +81,14 @@ class Login(View):
         for deliveryMan in Worker.objects.filter(login=username):
             if username == deliveryMan.login:
                 if password == deliveryMan.password:
+                    print(1)
                     return HttpResponse('1', headers=headers)
                 else:
+                    print(0)
+
                     return HttpResponse('0', headers=headers)
+        print(-1)
+
         return HttpResponse('-1', headers=headers)
 
-            # http://127.0.0.1:8000/login?username=aaa&password=123
+        # http://127.0.0.1:8000/login?username=aaa&password=123

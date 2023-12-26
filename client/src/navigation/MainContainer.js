@@ -42,7 +42,8 @@ export const MainContainer = () => {
                             }
                         },
                         tabBarStyle: {
-                            backgroundColor: COLORS.primary, height: '10%',
+                            backgroundColor: COLORS.primary,
+                            height: '10%',
                             borderTopEndRadius: 16,
                             borderTopLeftRadius: 16,
                             paddingTop: '10%',

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, SafeAreaView, Pressable, Settings} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView, Pressable} from 'react-native';
 import SafeAreaViewAndroid from "../../components/SafeAreaViewAndroid";
 import {COLORS} from "../../../constants/theme";
 import StarIcon from "../../../assets/icons/StarIcon";
@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
     container: {
         marginVertical: 20,
         paddingHorizontal: 24,
+        display: "flex",
+        justifyContent: "space-between",
     },
     header: {
         fontSize: 24,
@@ -112,24 +114,6 @@ export default function ProfilePage({ navigation }) {
                         />
                         <Text style={styles.buttonText}>
                             История заказов
-                        </Text>
-                        <ArrowIcon
-                            width={24}
-                            height={24}
-                            color={COLORS.primary}
-                        />
-                    </Pressable>
-                    <Pressable
-                        onPress={() => navigation.navigate('Statistics')}
-                        style={styles.button}
-                    >
-                        <StatisticsIcon
-                            color={COLORS.primary}
-                            width={24}
-                            height={24}
-                        />
-                        <Text style={styles.buttonText}>
-                            Статистика
                         </Text>
                         <ArrowIcon
                             width={24}

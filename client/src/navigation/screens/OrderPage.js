@@ -7,7 +7,8 @@ import {Comment} from "../../components/Comment";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {BigButton} from "../../ui/BigButton";
 import {useState} from "react";
-import {useMyOrderContext} from "../../../globalContext";
+import {useMyContext, useMyOrderContext} from "../../../globalContext";
+import getRequest from "../../../requestFunction";
 
 const styles = StyleSheet.create({
     container: {
@@ -122,8 +123,14 @@ const styles = StyleSheet.create({
     }
 })
 
+async function orderFinish(globalID, setIsMyOrder){
+    setIsMyOrder(false)
+    await getRequest(`finish-order?id=${globalID}`)
+}
+
 export default function OrderPage({ navigation }) {
-    const {isMyOrder, setIsMyOrder} = useMyOrderContext();
+    const { isMyOrder, setIsMyOrder} = useMyOrderContext();
+    const { globalID, setGlobalID } = useMyContext();
 
     return ( isMyOrder ?
         <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container]}>
@@ -214,7 +221,7 @@ export default function OrderPage({ navigation }) {
                     />
                 </View>
                 <View style={styles.button}>
-                    <BigButton
+                    <BigButton onPress={() => orderFinish(globalID, setIsMyOrder)}
                         title={'Завершить доставку'}
                     />
                 </View>

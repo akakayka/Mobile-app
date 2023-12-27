@@ -1,5 +1,19 @@
 import React, { createContext, useContext, useState } from 'react';
 
+const IsAuthContext = createContext();
+
+
+export const IsAuthProvider = ({ children }) => {
+    const [isAuth, setIsAuth] = useContext(false);
+
+    return (
+        <IsAuthContext.Provider value={{ isAuth, setIsAuth }}>
+            {children}
+        </IsAuthContext.Provider>
+    );
+};
+
+export const useIsAuthContext = () => useContext(IsAuthContext);
 
 const MyOrderContext = createContext();
 

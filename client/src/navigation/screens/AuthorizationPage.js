@@ -5,7 +5,7 @@ import {InputField} from "../../ui/InputField";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {COLORS} from "../../../constants/theme";
 import {fetchText} from "react-native-svg";
-import {useMyContext} from "../../../globalContext";
+import {useMyContext, useMyOrderContext} from "../../../globalContext";
 import {useDeliverymanContext} from "../../../UserContext";
 import getRequest from "../../../requestFunction";
 
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 
 
 export const AuthorizationPage = (props) => {
+    const {isMyOrder, setIsMyOrder} = useMyOrderContext();
     const { globalID, setGlobalID } = useMyContext();
     const { userInfo, setUserInfo } = useDeliverymanContext();
 
@@ -116,7 +117,11 @@ export const AuthorizationPage = (props) => {
                     const profileResponse = await getRequest(`get-profile-info?id=${data}`);
                     const profileData = await profileResponse.json();
                     setUserInfo(profileData);
-                    console.log(profileData)
+                    if(profileData.order !== -1)
+                    {
+                        setIsMyOrder(true)
+                    }
+                    console.log(profileData.order)
                 } catch (error) {
                     console.error('Ошибка запроса профиля:', error);
                 }

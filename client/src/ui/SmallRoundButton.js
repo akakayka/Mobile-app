@@ -21,12 +21,12 @@ export const SmallRoundButton = (props) => {
     return (
         <View>
             <Pressable
-                onPress={() => ('text')}
+                onPress={() => props.onPress()}
                 style={
                     ({pressed}) => [{
                         backgroundColor: props.disabled ? COLORS.lightGray4 : pressed ? COLORS.red : COLORS.primary,
                     },
-                    styles.button]
+                        styles.button]
                 }
             >
                 <PlusIcon

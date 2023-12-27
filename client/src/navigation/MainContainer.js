@@ -22,7 +22,7 @@ const ordersName = "Orders"
 
 const Tab = createBottomTabNavigator();
 
-export const MainContainer = () => {
+export const MainContainer = (props) => {
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -62,7 +62,7 @@ export const MainContainer = () => {
                 <Tab.Screen name={orderName} component={OrderPage} />
                 <Tab.Screen name={mapName} component={MapPage} />
                 <Tab.Screen name={ordersName} component={OrdersPage} />
-                <Tab.Screen name={profileName} component={ProfileContainer} />
+                <Tab.Screen name={profileName} component={ProfileContainer} onPress = {() => props.onPress()}/>
 
             </Tab.Navigator>
         </NavigationContainer>

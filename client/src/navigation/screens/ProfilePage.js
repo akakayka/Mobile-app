@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
     }
 })
 
-export default function ProfilePage({ navigation }) {
+export default function ProfilePage({ navigation }, props) {
+    console.log(props)
     return (
         <SafeAreaView style={[SafeAreaViewAndroid.AndroidSafeArea, styles.container]}>
             <Text style={styles.header}>
@@ -140,7 +141,7 @@ export default function ProfilePage({ navigation }) {
                         />
                     </Pressable>
                     <Pressable
-                        onPress={() => {}}
+                        onPress={() => props.onPress()}
                     >
                         <Text style={styles.logoutText}>
                             Выйти из аккаунта

@@ -5,6 +5,7 @@ import {COLORS} from "../../constants/theme";
 import AttentionIcon from "../../assets/icons/AttentionIcon";
 import {SmallRoundButton} from "../ui/SmallRoundButton";
 import {useMyContext, useMyOrderContext} from "../../globalContext";
+import getRequest from "../../requestFunction";
 
 
 const styles = StyleSheet.create({

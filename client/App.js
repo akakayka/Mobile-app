@@ -26,7 +26,7 @@ function App() {
         <MyOrderProvider>
             <UserProvider>
                 <MyProvider>
-                    {isAuth ? <MainContainer /> : <AuthorizationPage onPress={onPress}/>}
+                    {isAuth ? <MainContainer onPress={() => onPress()}/> : <AuthorizationPage onPress={onPress}/>}
                     {/*<MainContainer/>*/}
                 </MyProvider>
             </UserProvider>

@@ -21,9 +21,12 @@ from Server.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('available-orders', OrdersView.as_view(), name='orders'),
-    path('update-status-order', UpdateOrder.as_view(), name='order_update'),
+    path('end-order', EndOrder.as_view(), name='order_update'),
+    path('cancel-order', CancelOrder.as_view(), name='order_update'),
     path('get-profile-info', DeliverymanStats.as_view(), name='profile_info'),
     path('get-order-info', OrderView.as_view(), name='order_info'),
     path('login', Login.as_view(), name='login'),
-    path('set-deliveryman', SetDeliveryman.as_view(), name='set_deliveryman')
+    path('set-deliveryman', SetDeliveryman.as_view(), name='set_deliveryman'),
+    path('get-my-order', GetMyOrder.as_view(), name='get_order'),
+    path('get-history', GetHistoryOrders.as_view(), name='get_order')
 ]

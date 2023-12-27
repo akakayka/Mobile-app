@@ -17,6 +17,29 @@ class OrdersView(View):
         return HttpResponse(data, content_type='application/json', headers=headers)
         # http://127.0.0.1:8000/available-orders
 
+class GetMyOrder(View):
+    def get(self, request):
+        id = request.GET.get('id')
+        order = Order.objects.filter(deliveryman_id=int(id)).filter(status = OrderStatus.objects.all().get(pk=2))
+        order = serializers.serialize('json', [order[0]])
+        if len(order) == 0:
+            # Нет заказа
+            return HttpResponse('-1', content_type='application/json', headers=headers)
+
+        return HttpResponse(order, content_type='application/json', headers=headers)
+        # http://127.0.0.1:8000/get-my-order?id=1
+        # Вот пример возврата (это массив с одним элементом)
+        # [{"model": "Server.order", "pk": 1, "fields": {"adres": "hh", "coment": "h", "client_number": "hh", "deliveryman_id": 1, "status": 2}}]
+
+class GetHistoryOrders(View):
+    def get(self, request):
+        id = request.GET.get('id')
+        order = Order.objects.filter(deliveryman_id=int(id)).filter(status = OrderStatus.objects.all().get(pk=3))
+        order = serializers.serialize('json', [order_ for order_ in order])
+        return HttpResponse(order, content_type='application/json', headers=headers)
+        # http://127.0.0.1:8000/get-history?id=1
+
+
 
 class OrderView(View):
     def get(self, request):
@@ -25,17 +48,29 @@ class OrderView(View):
         data = serializers.serialize('json', [order])
         return HttpResponse(data[1:-1], content_type='application/json', headers=headers)
         # http://127.0.0.1:8000/get-order-info?id=123
-class UpdateOrder(View):
+class EndOrder(View):
     def get(self, request):
         # Добавить логику присваивания статуса
         order_id = request.GET.get('id')
-        status = request.GET.get('status')
         obj = Order.objects.all().get(id=order_id)
-        obj.status = OrderStatus.objects.get(name=status)
+        obj.status = OrderStatus.objects.get(pk = 3)
         obj.save()
         data = serializers.serialize('json', [obj])
         return HttpResponse(data[1:-1], content_type='application/json', headers=headers)
-        #http://127.0.0.1:8000/update-status-order?id=123&status=Доставляется
+
+        #http://127.0.0.1:8000/end-order?id=1
+class CancelOrder(View):
+    def get(self, request):
+        # Добавить логику присваивания статуса
+        order_id = request.GET.get('id')
+        obj = Order.objects.all().get(id=order_id)
+        obj.status = OrderStatus.objects.get(pk = 1)
+        obj.deliveryman_id = None
+        obj.save()
+        data = serializers.serialize('json', [obj])
+        return HttpResponse(data[1:-1], content_type='application/json', headers=headers)
+        # http://127.0.0.1:8000/cancel-order?id=1
+
 
 class SetDeliveryman(View):
     def get(self, request):
@@ -46,6 +81,8 @@ class SetDeliveryman(View):
         if order.deliveryman_id:
             return HttpResponse(-1, content_type='application/json', headers=headers)
         order.deliveryman_id=obj
+        order.status = OrderStatus.objects.get(pk = 2)
+
         order.save()
         return HttpResponse(1, content_type='application/json', headers=headers)
         #http://127.0.0.1:8000/set-deliveryman?id_order=123&id_deliveryman=123
@@ -55,10 +92,13 @@ class DeliverymanStats(View):
     def get(self, request):
         user_id = request.GET.get('id')
         obj = Deliveryman.objects.all().get(id=user_id)
-        stat = model_to_dict(obj.statistic)
+        order = -1
+        for cur_order in Order.objects.all():
+            if cur_order.deliveryman_id:
+                if cur_order.deliveryman_id.pk == obj.pk:
+                    order = cur_order.pk
         obj=model_to_dict(obj)
-        del obj['id'], stat['id'], obj['photo']
-        data = dict(list(obj.items()) + list(stat.items()))
+        data = dict(list(obj.items())+ [('order',order)])
         data = json.dumps(data)
         return HttpResponse(data, content_type='application/json', headers=headers)
         # http://127.0.0.1:8000/get-profile-info?id=123

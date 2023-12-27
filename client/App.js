@@ -3,6 +3,8 @@ import {MainContainer} from "./src/navigation/MainContainer";
 import {AuthorizationPage} from "./src/navigation/screens/AuthorizationPage";
 import * as Font from 'expo-font';
 import {useState} from "react";
+import {MyOrderProvider, MyProvider} from "./globalContext";
+import {UserProvider} from "./UserContext";
 
 const fonts = () => Font.loadAsync({
     'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
@@ -12,7 +14,7 @@ const fonts = () => Font.loadAsync({
 
 function App() {
     const [isReady, setIsReady] = useState(false);
-    const [isAuth, setIsAuth] = useState(false)
+    const [isAuth, setIsAuth] = useState(false);
 
 
 
@@ -21,8 +23,14 @@ function App() {
     }
 
     return (
-        // isAuth ? <MainContainer /> : <AuthorizationPage onPress={onPress}/>
-        <MainContainer/>
+        <MyOrderProvider>
+            <UserProvider>
+                <MyProvider>
+                    {isAuth ? <MainContainer /> : <AuthorizationPage onPress={onPress}/>}
+                    {/*<MainContainer/>*/}
+                </MyProvider>
+            </UserProvider>
+        </MyOrderProvider>
     );
 }
 

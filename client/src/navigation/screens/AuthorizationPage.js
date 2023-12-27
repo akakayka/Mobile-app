@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
 import {BigButton} from "../../ui/BigButton";
 import {InputField} from "../../ui/InputField";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {COLORS} from "../../../constants/theme";
 import {fetchText} from "react-native-svg";
+import {useMyContext} from "../../../globalContext";
+import {useDeliverymanContext} from "../../../UserContext";
+import getRequest from "../../../requestFunction";
 
 const styles = StyleSheet.create({
     container: {
@@ -47,6 +50,9 @@ const styles = StyleSheet.create({
 
 
 export const AuthorizationPage = (props) => {
+    const { globalID, setGlobalID } = useMyContext();
+    const { userInfo, setUserInfo } = useDeliverymanContext();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [borderStyle, onChangeBorder] = useState({
@@ -84,56 +90,45 @@ export const AuthorizationPage = (props) => {
         })
     }
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         try {
             console.log(username);
             console.log(password);
-            let headers = new Headers();
-
-            headers.append('Content-Type', 'text/html');
-            headers.append('Accept', 'text/html');
-            headers.append('Access-Control-Allow-Origin', '*');
-            headers.append('Access-Control-Allow-Headers', 'Content-type');
-            headers.append('Access-Control-Allow-Methods', 'GET');
-            headers.append('Access-Control-Max-Age', '7');
-            headers.append('Access-Control-Allow-Credentials', 'true');
-            headers.append('Cross-Origin-Opener-Policy', 'same-origin');
-            const request = new XMLHttpRequest();
-            // request.onreadystatechange = e => {
-            //     console.log(request);
-            //     if (request.readyState !== 4) {
-            //         return;
-            //     }
-            //
-            //     if (request.status === 200) {
-            //         console.log('success', request.responseText);
-            //     } else {
-            //         console.warn('error');
-            //     }
-            // };
-
-            request.open('GET', `http://127.0.0.1:8000/login?username=${username}&password=${password}`);
-
-            request.send();
-            let data;
-            console.log(request)
-
-            request.onreadystatechange = () => {
-                let data = request.responseText;
 
 
-            if (data==='1') {
+
+            const res = await getRequest(`login?username=${username}&password=${password}`);
+
+
+
+
+
+
+            let data = await res.json()
+
+
+            if (data > 0) {
                 // Успешная аутентификация, сохраните токен в AsyncStorage или другом хранилище
+                // data - IID .
+                setGlobalID(data)
+                console.log(globalID)
+                try {
+                    const profileResponse = await getRequest(`get-profile-info?id=${data}`);
+                    const profileData = await profileResponse.json();
+                    setUserInfo(profileData);
+                    console.log(profileData)
+                } catch (error) {
+                    console.error('Ошибка запроса профиля:', error);
+                }
                 props.onPress();
-            } else if(data==='0' || data==='-1') {
+            } else if (data === -1) {
                 // Ошибка аутентификации, вы можете показать сообщение об ошибке
                 alert(data.error || 'Ошибка аутентификации');
             }
-            }
-            }
-            catch (error) {
-                console.error('Ошибка запроса:', error);
-            }
+        }
+        catch (error) {
+            console.error('Ошибка запроса:', error);
+        }
     };
 
     return (

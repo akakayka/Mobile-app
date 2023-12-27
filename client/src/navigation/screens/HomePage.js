@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {View, Text, SafeAreaView, StyleSheet, ScrollView, Pressable} from 'react-native';
 import SafeAreaViewAndroid from "../../components/SafeAreaViewAndroid";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {CurrentOrder} from "../../components/CurrentOrder";
 import {OrderList} from "../../components/OrderList";
 import ArrowIcon from "../../../assets/icons/Arrowicon";
 import {COLORS} from "../../../constants/theme";
+import {useDeliverymanContext} from "../../../UserContext";
+import {useMyOrderContext} from "../../../globalContext";
 
 const styles = StyleSheet.create({
     container: {
@@ -41,6 +43,27 @@ const styles = StyleSheet.create({
 })
 
 export default function HomePage({ navigation }) {
+    const { userInfo, setUserInfo } = useDeliverymanContext();
+    const { isMyOrder, setIsMyOrder} = useMyOrderContext()
+    const [list, setList] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/available-orders', { method: 'GET' });
+                const data = await response.json();
+                setList(data);
+            } catch (error) {
+                console.error('Ошибка запроса:', error);
+            }
+        };
+
+        fetchData();}, []);
+
+    const transformedList = list.map(element => ({
+        number: element.pk,
+        address: element.fields.adres,
+    }));
+
     const [ordersData, setOrdersData] = useState([
         {
             number: '054',
@@ -84,28 +107,30 @@ export default function HomePage({ navigation }) {
             <SafeAreaView style={[SafeAreaViewAndroid.AndroidSafeArea, styles.container]}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.header}>
-                        Добро пожаловать, Тимур 👋
+                        Добро пожаловать, {userInfo.name} 👋
                     </Text>
                 </View>
                 <View style={styles.currentOrderContainer}>
                     <Text style={styles.currentOrderHeader}>
                         Текущий заказ
                     </Text>
-                    <CurrentOrder
-                        data={{
-                            number: 1,
-                            address: 'ffsdfs',
-                            distance: 'adada',
-                            timeFrom: '11:11'
-                        }}
-                    />
+                    {
+                        <CurrentOrder
+                            data={{
+                                number: 1,
+                                address: 'ffsdfs',
+                                distance: 'adada',
+                                timeFrom: '11:11'
+                            }}
+                        />
+                    }
                 </View>
                 <View>
                     <Text style={styles.currentOrderHeader}>
                         Доступные заказы
                     </Text>
                     <OrderList
-                        data={ordersData.slice(0, Math.min(3, ordersData.length))}
+                        data={transformedList.slice(0, Math.min(3, ordersData.length))}
                         scroll={false}
                     />
                 </View>

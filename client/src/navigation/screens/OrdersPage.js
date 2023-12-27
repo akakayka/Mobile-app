@@ -5,6 +5,7 @@ import {Comment} from "../../components/Comment";
 import SafeAreaViewAndroid from "../../components/SafeAreaViewAndroid";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {COLORS} from "../../../constants/theme";
+import {useEffect, useState} from "react";
 
 
 const data = [
@@ -67,13 +68,33 @@ const styles = StyleSheet.create({
 })
 
 
-export default function OrdersPage({ navigation }) {
+export default function OrdersPage({navigation}) {
+    const [list, setList] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/available-orders', { method: 'GET' });
+                const data = await response.json();
+                setList(data);
+            } catch (error) {
+                console.error('Ошибка запроса:', error);
+            }
+        };
+
+        fetchData();}, []);
+
+    const transformedList = list.map(element => ({
+        number: element.pk,
+        address: element.fields.adres,
+    }));
+
+    console.log(transformedList);
     return (
         <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container] }>
             <Text style={styles.header}>Доступные заказы</Text>
-            <Text style={styles.desc}>Всего доступно {data.length} заказа</Text>
+            <Text style={styles.desc}>Всего доступно {transformedList.length} заказа</Text>
             <OrderList
-                data={data}
+                data={transformedList}
                 scroll={true}
             >
 

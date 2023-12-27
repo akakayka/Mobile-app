@@ -4,6 +4,8 @@ import LocationIcon from "../../assets/icons/LocationIcon";
 import {COLORS} from "../../constants/theme";
 import AttentionIcon from "../../assets/icons/AttentionIcon";
 import {SmallRoundButton} from "../ui/SmallRoundButton";
+import {useMyContext, useMyOrderContext} from "../../globalContext";
+
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -56,7 +58,30 @@ const styles = StyleSheet.create({
     }
 })
 
+async function orderTake(props, id, setIsMyOrder) {
+    const res = await getRequest(`set-deliveryman?id_order=${props.data.number}&id_deliveryman=${id}`);
+
+    if (res.ok)
+    {
+        const result = await res.json()
+        console.log(result)
+        if(result!==-2)
+        {
+            props.onHideOrder(props.data.number);
+        }
+        if(result!==-2 || result!==-1)
+        {
+            setIsMyOrder(true);
+        }
+    }
+
+
+
+}
+
 export const Order = (props) => {
+    const {isMyOrder, setIsMyOrder} = useMyOrderContext();
+    const { globalID, setGlobalID } = useMyContext();
     return (
         <View style={{...styles.mainContainer, ...props.style}}>
             <View style={styles.container}>
@@ -71,13 +96,13 @@ export const Order = (props) => {
                         />
                         <Text style={styles.address}>{props.data.address}</Text>
                     </View>
-                    <Text style={styles.distance}>{props.data.distance} км</Text>
+                    {/*<Text style={styles.distance}>{props.data.distance} км</Text>*/}
                 </View>
                 <View style={styles.buttonContainer}>
-                    <SmallRoundButton />
+                    <SmallRoundButton onPress={() => orderTake(props, globalID, setIsMyOrder)}/>
                 </View>
             </View>
-            <View style={styles.infoBlock}>
+            {/*<View style={styles.infoBlock}>
                 <Text style={styles.text}>Принят {props.data.timeFrom}</Text>
                 <View style={styles.info}>
                     <AttentionIcon
@@ -88,7 +113,7 @@ export const Order = (props) => {
                     />
                     <Text style={styles.text}>Доставить до {props.data.timeTo}</Text>
                 </View>
-            </View>
+            </View>*/}
         </View>
     )
 }

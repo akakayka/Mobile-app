@@ -6,6 +6,8 @@ import AttentionIcon from "../../../assets/icons/AttentionIcon";
 import {Comment} from "../../components/Comment";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {BigButton} from "../../ui/BigButton";
+import {useState} from "react";
+import {useMyOrderContext} from "../../../globalContext";
 
 const styles = StyleSheet.create({
     container: {
@@ -120,8 +122,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default function OrderPage({ navigation }, props) {
-    return (
+export default function OrderPage({ navigation }) {
+    const {isMyOrder, setIsMyOrder} = useMyOrderContext();
+
+    return ( isMyOrder ?
         <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container]}>
             <ScrollView
                 style={styles.scroll}
@@ -222,6 +226,10 @@ export default function OrderPage({ navigation }, props) {
                     </View>
                 </Pressable>
             </ScrollView>
-        </SafeAreaView>
-    );
+        </SafeAreaView> :
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text
+
+                style={{ fontSize: 26, fontWeight: 'bold' }}>Возьми заказ</Text>
+        </View>);
 }

@@ -26,7 +26,7 @@ export const SmallRoundButton = (props) => {
                     ({pressed}) => [{
                         backgroundColor: props.disabled ? COLORS.lightGray4 : pressed ? COLORS.red : COLORS.primary,
                     },
-                    styles.button]
+                        styles.button]
                 }
             >
                 <PlusIcon

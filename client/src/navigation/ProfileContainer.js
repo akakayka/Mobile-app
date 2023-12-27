@@ -7,7 +7,7 @@ import {NavigationContainer} from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
-export const ProfileContainer = () => {
+export const ProfileContainer = (props) => {
     return (
             <Stack.Navigator
                 screenOptions={{
@@ -15,8 +15,8 @@ export const ProfileContainer = () => {
                     header: () => false
                 }}
             >
-                <Stack.Screen name={'Back'} component={ProfilePage}/>
-                <Stack.Screen name={'Settings'} component={Settings}/>
+                <Stack.Screen name={'Back'} component={ProfilePage} onPress = {() => props.onPress()}/>
+                <Stack.Screen name={'Settings'} component={Settings} />
                 <Stack.Screen name={'History'} component={OrdersHistory}/>
             </Stack.Navigator>
     );

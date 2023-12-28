@@ -40,6 +40,7 @@ class Order(models.Model):
     adres = models.TextField(max_length=150, verbose_name='Улица Дом')
     dop_adres = models.TextField(max_length=150, verbose_name='Подъезд/этаж/квартира')
     cost = models.FloatField()
+    name = models.CharField(max_length=20, verbose_name="Имя")
     time_limit = models.CharField(max_length=5)
     type_pay = models.ForeignKey('TypePay', on_delete=models.PROTECT, blank=True, null = True)
     coment = models.TextField(max_length=300, blank=True,verbose_name='Комментарий к заказу')

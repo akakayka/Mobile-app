@@ -24,7 +24,7 @@ class GetMyOrder(View):
         order = serializers.serialize('json', [order[0]])
         if len(order) == 0:
             # Нет заказа
-            return HttpResponse('-1', content_type='application/json', headers=headers)
+            return HttpResponse('-1', headers=headers)
 
         return HttpResponse(order, content_type='application/json', headers=headers)
         # http://127.0.0.1:8000/get-my-order?id=1
@@ -59,7 +59,7 @@ class EndOrder(View):
         obj.save()
         data = serializers.serialize('json', [obj])
         return HttpResponse(data[1:-1], content_type='application/json', headers=headers)
-
+        # id заказа
         #http://127.0.0.1:8000/end-order?id=1
 class CancelOrder(View):
     def get(self, request):
@@ -71,6 +71,7 @@ class CancelOrder(View):
         obj.save()
         data = serializers.serialize('json', [obj])
         return HttpResponse(data[1:-1], content_type='application/json', headers=headers)
+        # id заказа
         # http://127.0.0.1:8000/cancel-order?id=1
 
 
@@ -97,11 +98,11 @@ class DeliverymanStats(View):
     def get(self, request):
         user_id = request.GET.get('id')
         obj = Deliveryman.objects.all().get(id=user_id)
-        order = -1
-        for cur_order in Order.objects.all():
-            if cur_order.deliveryman_id:
-                if cur_order.deliveryman_id.pk == obj.pk:
-                    order = cur_order.pk
+        order = Order.objects.filter(deliveryman_id=int(user_id)).filter(status = OrderStatus.objects.all().get(pk=2))
+        if len(order) == 0:
+            order = -1
+        else:
+            order = order[0].pk
         obj=model_to_dict(obj)
         data = dict(list(obj.items())+ [('order',order)])
         data = json.dumps(data)
@@ -115,7 +116,7 @@ class Login(View):
         username = request.GET.get('username')
         password = request.GET.get('password')
 
-        for deliveryMan in Worker.objects.filter(login=username):
+        for deliveryMan in Deliveryman.objects.filter(login=username):
             if username == deliveryMan.login:
                 if password == deliveryMan.password:
                     print(1)

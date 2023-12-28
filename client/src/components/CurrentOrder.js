@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {StyleSheet, Text, View} from "react-native";
 import LocationIcon from "../../assets/icons/LocationIcon";
 import {COLORS} from "../../constants/theme";

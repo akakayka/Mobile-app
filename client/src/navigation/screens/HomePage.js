@@ -6,8 +6,8 @@ import {CurrentOrder} from "../../components/CurrentOrder";
 import {OrderList} from "../../components/OrderList";
 import ArrowIcon from "../../../assets/icons/Arrowicon";
 import {COLORS} from "../../../constants/theme";
-import {useDeliverymanContext} from "../../../UserContext";
-import {useMyOrderContext} from "../../../globalContext";
+import {useDeliverymanContext} from "../../../../../пиздец/client/UserContext";
+import {useMyOrderContext} from "../../../../../пиздец/client/globalContext";
 
 const styles = StyleSheet.create({
     container: {

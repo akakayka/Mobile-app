@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import {useMyContext} from "../../../globalContext";
+import {useMyContext} from "../../../../../пиздец/client/globalContext";
 
 export default function MapPage({ navigation }) {
     const { globalID, setGlobalID } = useMyContext();

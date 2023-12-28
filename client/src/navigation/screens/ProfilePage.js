@@ -7,7 +7,7 @@ import ListIcon from "../../../assets/icons/ListIcon";
 import StatisticsIcon from "../../../assets/icons/StatisticsIcon";
 import SettingsIcon from "../../../assets/icons/SettingsIcon";
 import ArrowIcon from "../../../assets/icons/Arrowicon";
-import {useDeliverymanContext} from "../../../UserContext";
+import {useDeliverymanContext} from "../../../../../пиздец/client/UserContext";
 
 const styles = StyleSheet.create({
     container: {

@@ -7,7 +7,7 @@ import {Comment} from "../../components/Comment";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {BigButton} from "../../ui/BigButton";
 import {useEffect, useState} from "react";
-import {useMyContext, useMyOrderContext} from "../../../globalContext";
+import {useMyContext, useMyOrderContext, useOrderContext} from "../../../globalContext";
 import getRequest from "../../../requestFunction";
 
 const styles = StyleSheet.create({
@@ -130,23 +130,15 @@ async function orderFinish(globalID, setIsMyOrder){
 
 async function orderCancel(globalID, setIsMyOrder){
     setIsMyOrder(false)
-    await getRequest(`finish-order?id=${globalID}`)
+    await getRequest(`cancel-order?id=${globalID}`)
 }
 
 export default function OrderPage({ navigation }) {
     const { isMyOrder, setIsMyOrder} = useMyOrderContext();
     const { globalID, setGlobalID } = useMyContext();
-    const [order, setOrder] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setOrder(c);
-        } catch (error) {
-            console.error('Ошибка запроса:', error);
-        }
-    };
+    const {currentOrder, setCurrentOrder} = useOrderContext();
+    console.log(currentOrder)
 
-    fetchData();}, []);
 
 
         return ( isMyOrder ?
@@ -163,7 +155,7 @@ export default function OrderPage({ navigation }) {
                     </Text>
                 </View>
                 <CurrentOrder
-                    data={order}
+                    data={currentOrder}
                 />
                 <View style={styles.timeBlock}>
                     <View style={styles.time}>
@@ -232,11 +224,11 @@ export default function OrderPage({ navigation }) {
                     />
                 </View>
                 <View style={styles.button}>
-                    <BigButton onPress={() => orderFinish(order.number, setIsMyOrder)}
+                    <BigButton onPress={() => orderFinish(currentOrder.number, setIsMyOrder)}
                         title={'Завершить доставку'}
                     />
                 </View>
-                <Pressable onPress={() => orderCancel(order.number, setIsMyOrder)}>
+                <Pressable onPress={() => orderCancel(currentOrder.number, setIsMyOrder)}>
                     <View style={styles.cancelBlock}>
                         <Text style={styles.cancel}>
                             Отказаться от заказа

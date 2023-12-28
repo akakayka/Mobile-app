@@ -1,6 +1,33 @@
+
+
+
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py shell
+
+
+
+from Server.models import *
+a = OrderStatus(name='Заказ ждет курьера')
+a.save()
+a = OrderStatus(name='Заказ доставляется')
+a.save()
+a = OrderStatus(name='Заказ доставлен')
+a.save()
+a = TypePay(name='Безналичный расчет')
+a.save()
+a = TypePay(name='Наличный расчет')
+a.save()
+a = TypePay(name='Анал')
+a.save()
+exit()
+
+
+
+
+
 python manage.py createsuperuser
-
-
 
 
 admin
@@ -17,22 +44,3 @@ python manage.py runserver
 
 
 
-python manage.py makemigrations
-python manage.py migrate
-python manage.py shell
-from Server.models import *
-
-
-a = OrderStatus(name='Заказ ждет курьера')
-a.save()
-a = OrderStatus(name='Заказ доставляется')
-a.save()
-a = OrderStatus(name='Заказ доставлен')
-a.save()
-a = TypePay(name='Безналичный расчет')
-a.save()
-a = TypePay(name='Наличный расчет')
-a.save()
-a = TypePay(name='Анал')
-a.save()
-exit()

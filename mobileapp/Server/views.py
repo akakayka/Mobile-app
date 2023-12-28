@@ -81,15 +81,14 @@ class SetDeliveryman(View):
         id_deliveryman = request.GET.get('id_deliveryman')
         obj = Deliveryman.objects.all().get(id=id_deliveryman)
         order = Order.objects.all().get(id=id_order)
-        for cur_order in Order.objects.all():
-            if cur_order.deliveryman_id:
-                if cur_order.deliveryman_id.pk == obj.pk:
-                    return HttpResponse(-2, content_type='application/json', headers=headers)
+        if len(Order.objects.all().filter(status = OrderStatus.objects.all().get(pk=2)).filter(deliveryman_id = obj))>0 :
+            # Дебил. У тебя уже есть заказ
+            return HttpResponse(-2, content_type='application/json', headers=headers)
         if order.deliveryman_id:
+            # Этот заказ уже занят
             return HttpResponse(-1, content_type='application/json', headers=headers)
         order.deliveryman_id=obj
         order.status = OrderStatus.objects.get(pk = 2)
-
         order.save()
         return HttpResponse(1, content_type='application/json', headers=headers)
         #http://127.0.0.1:8000/set-deliveryman?id_order=123&id_deliveryman=123

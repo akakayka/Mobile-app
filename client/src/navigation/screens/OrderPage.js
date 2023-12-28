@@ -6,7 +6,7 @@ import AttentionIcon from "../../../assets/icons/AttentionIcon";
 import {Comment} from "../../components/Comment";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {BigButton} from "../../ui/BigButton";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useMyContext, useMyOrderContext} from "../../../globalContext";
 import getRequest from "../../../requestFunction";
 
@@ -128,11 +128,28 @@ async function orderFinish(globalID, setIsMyOrder){
     await getRequest(`finish-order?id=${globalID}`)
 }
 
+async function orderCancel(globalID, setIsMyOrder){
+    setIsMyOrder(false)
+    await getRequest(`finish-order?id=${globalID}`)
+}
+
 export default function OrderPage({ navigation }) {
     const { isMyOrder, setIsMyOrder} = useMyOrderContext();
     const { globalID, setGlobalID } = useMyContext();
+    const [order, setOrder] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setOrder(c);
+        } catch (error) {
+            console.error('Ошибка запроса:', error);
+        }
+    };
 
-    return ( isMyOrder ?
+    fetchData();}, []);
+
+
+        return ( isMyOrder ?
         <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container]}>
             <ScrollView
                 style={styles.scroll}
@@ -146,13 +163,7 @@ export default function OrderPage({ navigation }) {
                     </Text>
                 </View>
                 <CurrentOrder
-                    data={{
-                        number: '054',
-                        address: 'Комсомольская 70',
-                        distance: '2 подъезд, 15 этаж, 85 кв.',
-                        timeFrom: '16:20',
-                        timeTo: '18:59'
-                    }}
+                    data={order}
                 />
                 <View style={styles.timeBlock}>
                     <View style={styles.time}>
@@ -221,11 +232,11 @@ export default function OrderPage({ navigation }) {
                     />
                 </View>
                 <View style={styles.button}>
-                    <BigButton onPress={() => orderFinish(globalID, setIsMyOrder)}
+                    <BigButton onPress={() => orderFinish(order.number, setIsMyOrder)}
                         title={'Завершить доставку'}
                     />
                 </View>
-                <Pressable>
+                <Pressable onPress={() => orderCancel(order.number, setIsMyOrder)}>
                     <View style={styles.cancelBlock}>
                         <Text style={styles.cancel}>
                             Отказаться от заказа

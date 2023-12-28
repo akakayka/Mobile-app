@@ -4,7 +4,7 @@ import LocationIcon from "../../assets/icons/LocationIcon";
 import {COLORS} from "../../constants/theme";
 import AttentionIcon from "../../assets/icons/AttentionIcon";
 import {SmallRoundButton} from "../ui/SmallRoundButton";
-import {useMyContext, useMyOrderContext} from "../../globalContext";
+import {useMyContext, useMyOrderContext, useOrderContext} from "../../globalContext";
 import getRequest from "../../requestFunction";
 
 
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     }
 })
 
-async function orderTake(props, id, setIsMyOrder) {
+async function orderTake(props, id, setIsMyOrder, setCurrentOrder) {
     const res = await getRequest(`set-deliveryman?id_order=${props.data.number}&id_deliveryman=${id}`);
 
     if (res.ok)
@@ -70,8 +70,20 @@ async function orderTake(props, id, setIsMyOrder) {
         {
             props.onHideOrder(props.data.number);
         }
-        if(result!==-2 || result!==-1)
+        if(result!==-2 && result!==-1)
         {
+            const a = await getRequest(`get-my-order?id=${id}`);
+            const b = await a.json()
+            const c = {number: b[0].pk,
+                address: b[0].fields.adres,
+                distance: b[0].fields.dop_adres,
+                timeTo: b[0].fields.time_limit,
+                price: b[0].fields.cost,
+                typeOfPay: b[0].fields.type_pay,
+                comment: b[0].fields.coment,
+                tel: b[0].fields.client_number,
+                name: b[0].fields.name}
+            setCurrentOrder(c)
             setIsMyOrder(true);
         }
     }
@@ -83,6 +95,7 @@ async function orderTake(props, id, setIsMyOrder) {
 export const Order = (props) => {
     const {isMyOrder, setIsMyOrder} = useMyOrderContext();
     const { globalID, setGlobalID } = useMyContext();
+    const {currentOrder, setCurrentOrder} = useOrderContext();
     return (
         <View style={{...styles.mainContainer, ...props.style}}>
             <View style={styles.container}>
@@ -100,7 +113,7 @@ export const Order = (props) => {
                     {/*<Text style={styles.distance}>{props.data.distance} км</Text>*/}
                 </View>
                 <View style={styles.buttonContainer}>
-                    <SmallRoundButton onPress={() => orderTake(props, globalID, setIsMyOrder)}/>
+                    <SmallRoundButton onPress={() => orderTake(props, globalID, setIsMyOrder, setCurrentOrder)}/>
                 </View>
             </View>
             {/*<View style={styles.infoBlock}>

@@ -5,7 +5,7 @@ import {InputField} from "../../ui/InputField";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {COLORS} from "../../../constants/theme";
 import {fetchText} from "react-native-svg";
-import {useMyContext, useMyOrderContext} from "../../../globalContext";
+import {useIsAuthContext, useMyContext, useMyOrderContext, useOrderContext} from "../../../globalContext";
 import {useDeliverymanContext} from "../../../UserContext";
 import getRequest from "../../../requestFunction";
 
@@ -53,7 +53,7 @@ export const AuthorizationPage = (props) => {
     const {isMyOrder, setIsMyOrder} = useMyOrderContext();
     const { globalID, setGlobalID } = useMyContext();
     const { userInfo, setUserInfo } = useDeliverymanContext();
-
+    const {currentOrder, setCurrentOrder} = useOrderContext();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [borderStyle, onChangeBorder] = useState({
@@ -119,7 +119,21 @@ export const AuthorizationPage = (props) => {
                     setUserInfo(profileData);
                     if(profileData.order !== -1)
                     {
+                        const a = await getRequest(`get-my-order?id=${data}`);
+                        const b = await a.json();
+                        console.log(data);
+                        const c = {number: b[0].pk,
+                            address: b[0].fields.adres,
+                            distance: b[0].fields.dop_adres,
+                            timeTo: b[0].fields.time_limit,
+                            price: b[0].fields.cost,
+                            typeOfPay: b[0].fields.type_pay,
+                            comment: b[0].fields.coment,
+                            tel: b[0].fields.client_number,
+                            name: b[0].fields.name}
+                        setCurrentOrder(c);
                         setIsMyOrder(true)
+
                     }
                     console.log(profileData.order)
                 } catch (error) {

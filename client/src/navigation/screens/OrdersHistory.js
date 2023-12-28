@@ -1,14 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Text, View, StyleSheet, SafeAreaView, Pressable} from "react-native";
 import safeAreaViewAndroid from "../../components/SafeAreaViewAndroid";
 import BackArrowIcon from "../../../assets/icons/BackArrowicon";
 import {COLORS} from "../../../constants/theme";
 import {OrderList} from "../../components/OrderList";
 import {CurrentOrdersList} from "../../components/CurrentOrdersList";
+import getRequest from "../../../requestFunction";
 
 
 export const OrdersHistory = ({navigation}, props) => {
 
+    const [list, setList] = useState([]);
     const styles = StyleSheet.create({
         container: {
             marginTop: 20,
@@ -32,6 +34,8 @@ export const OrdersHistory = ({navigation}, props) => {
             height: '87%'
         }
     })
+
+
 
     const goBack = () => {
         navigation.navigate('Back')
@@ -74,6 +78,26 @@ export const OrdersHistory = ({navigation}, props) => {
             timeTo: '18:59'
         }]
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getRequest('available-orders');
+                const data = await response.json();
+                setList(data);
+            } catch (error) {
+                console.error('Ошибка запроса:', error);
+            }
+        };
+
+        fetchData();}, []);
+
+    const transformedList = list.map(element => ({
+        number: element.pk,
+        address: element.fields.adres,
+    }));
+
+
+
     return (
         <SafeAreaView style={[styles.container, safeAreaViewAndroid.AndroidSafeArea]}>
             <Pressable style={styles.backButton} onPress={goBack}>
@@ -89,7 +113,7 @@ export const OrdersHistory = ({navigation}, props) => {
 
             <CurrentOrdersList
                 style={styles.orderList}
-                data={data}
+                data={transformedList}
                 scroll={true}
             />
         </SafeAreaView>

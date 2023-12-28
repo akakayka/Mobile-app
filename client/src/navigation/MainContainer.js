@@ -58,11 +58,21 @@ export const MainContainer = (props) => {
                 })}
 
             >
-                <Tab.Screen name={homeName} component={HomePage} />
-                <Tab.Screen name={orderName} component={OrderPage} />
-                <Tab.Screen name={mapName} component={MapPage} />
-                <Tab.Screen name={ordersName} component={OrdersPage} />
-                <Tab.Screen name={profileName} component={ProfileContainer} onPress = {() => props.onPress()}/>
+                <Tab.Screen name={homeName} component={HomePage} options={{
+                    unmountOnBlur: true, // Добавьте эту опцию
+                }}/>
+                <Tab.Screen name={orderName} component={OrderPage} options={{
+                    unmountOnBlur: true, // Добавьте эту опцию
+                }}/>
+                <Tab.Screen name={mapName} component={MapPage} options={{
+                    unmountOnBlur: true, // Добавьте эту опцию
+                }}/>
+                <Tab.Screen name={ordersName} component={OrdersPage} options={{
+                    unmountOnBlur: true, // Добавьте эту опцию
+                }}/>
+                <Tab.Screen name={profileName} component={ProfileContainer} onPress = {() => props.onPress()} options={{
+                    unmountOnBlur: true, // Добавьте эту опцию
+                }}/>
 
             </Tab.Navigator>
         </NavigationContainer>

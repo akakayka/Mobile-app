@@ -6,8 +6,9 @@ import {CurrentOrder} from "../../components/CurrentOrder";
 import {OrderList} from "../../components/OrderList";
 import ArrowIcon from "../../../assets/icons/Arrowicon";
 import {COLORS} from "../../../constants/theme";
-import {useDeliverymanContext} from "../../../../../пиздец/client/UserContext";
-import {useMyOrderContext} from "../../../../../пиздец/client/globalContext";
+import {useDeliverymanContext} from "../../../UserContext";
+import {useMyContext, useMyOrderContext, useOrderContext} from "../../../globalContext";
+import getRequest from "../../../requestFunction";
 
 const styles = StyleSheet.create({
     container: {
@@ -46,10 +47,13 @@ export default function HomePage({ navigation }) {
     const { userInfo, setUserInfo } = useDeliverymanContext();
     const { isMyOrder, setIsMyOrder} = useMyOrderContext()
     const [list, setList] = useState([]);
+    const {currentOrder, setCurrentOrder} = useOrderContext();
+    const { globalID, setGlobalID } = useMyContext();
+    console.log(currentOrder)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:8000/available-orders', { method: 'GET' });
+                const response = await getRequest('available-orders');
                 const data = await response.json();
                 setList(data);
             } catch (error) {
@@ -58,6 +62,33 @@ export default function HomePage({ navigation }) {
         };
 
         fetchData();}, []);
+
+
+
+    /*useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getRequest(`get-my-order?id=${globalID}`);
+                const data = await response.json();
+                console.log(data);
+                setOrder({
+                    number: data[0].pk,
+                    address: data[0].fields.adres,
+                    distance: data[0].fields.dop_adres,
+                    timeTo: data[0].fields.time_limit,
+                    price: data[0].fields.cost,
+                    typeOfPay: data[0].fields.type_pay,
+                    comment: data[0].fields.coment,
+                    tel: data[0].fields.client_number,
+                    name: data[0].fields.name
+                });
+            } catch (error) {
+                console.error('Ошибка запроса:', error);
+            }
+        };
+
+        fetchData();
+    }, []);*/
 
     const transformedList = list.map(element => ({
         number: element.pk,
@@ -115,36 +146,36 @@ export default function HomePage({ navigation }) {
                         Текущий заказ
                     </Text>
                     {
-                        <CurrentOrder
-                            data={{
-                                number: 1,
-                                address: 'ffsdfs',
-                                distance: 'adada',
-                                timeFrom: '11:11'
-                            }}
-                        />
+                        isMyOrder?
+                            <CurrentOrder
+                                data={currentOrder}
+                            />: <Text>Возьмите заказ</Text>
                     }
                 </View>
                 <View>
                     <Text style={styles.currentOrderHeader}>
                         Доступные заказы
                     </Text>
+
                     <OrderList
                         data={transformedList.slice(0, Math.min(3, ordersData.length))}
                         scroll={false}
                     />
                 </View>
-                <View style={styles.buttonContainer}>
-                    <Pressable
-                        style={styles.button}
-                        onPress={() => navigation.navigate('Orders')}
-                    >
-                        <Text style={styles.buttonText}>
-                            Показать больше заказов
-                        </Text>
-                        <ArrowIcon height={20} width={20} color={COLORS.lightGray2} />
-                    </Pressable>
-                </View>
+                {transformedList.length > 0?
+                    <View style={styles.buttonContainer}>
+                        <Pressable
+                            style={styles.button}
+                            onPress={() => navigation.navigate('Orders')}
+                        >
+                            <Text style={styles.buttonText}>
+                                Показать больше заказов
+                            </Text>
+                            <ArrowIcon height={20} width={20} color={COLORS.lightGray2} />
+
+                        </Pressable>
+                    </View>
+                    : <Text>Доступных заказов нет</Text> }
             </SafeAreaView>
         </ScrollView>
     );

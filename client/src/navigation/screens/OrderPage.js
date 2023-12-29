@@ -120,7 +120,20 @@ const styles = StyleSheet.create({
     cancel: {
         fontSize: 16,
         color: COLORS.lightGray2,
-    }
+    },
+    noOrderTitle: {
+        fontSize: 24,
+        fontWeight: "bold",
+        marginBottom: 10,
+        color: COLORS.black,
+    },
+    noOrderText: {
+        paddingHorizontal: 24,
+        color: COLORS.lightGray2,
+        fontSize: 16,
+        lineHeight: 24,
+        marginBottom: 24,
+    },
 })
 
 async function orderFinish(globalID, setIsMyOrder){
@@ -259,8 +272,15 @@ export default function OrderPage({ navigation }) {
             </ScrollView>
         </SafeAreaView> :
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text
-
-                style={{ fontSize: 26, fontWeight: 'bold' }}>Возьми заказ</Text>
+            <Text style={styles.noOrderTitle}>
+                Заказ не взят
+            </Text>
+            <Text style={styles.noOrderText}>
+                Скорее выберите заказ и порадуйте наших покупателей вкуснейшей пиццей!
+            </Text>
+            <BigButton
+                title={'Взять заказ'}
+                onPress={() => navigation.navigate('Orders')}
+            />
         </View>);
 }

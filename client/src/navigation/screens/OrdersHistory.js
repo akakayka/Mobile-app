@@ -6,10 +6,11 @@ import {COLORS} from "../../../constants/theme";
 import {OrderList} from "../../components/OrderList";
 import {CurrentOrdersList} from "../../components/CurrentOrdersList";
 import getRequest from "../../../requestFunction";
+import {useMyContext} from "../../../globalContext";
 
 
 export const OrdersHistory = ({navigation}, props) => {
-
+    const { globalID, setGlobalID } = useMyContext();
     const [list, setList] = useState([]);
     const styles = StyleSheet.create({
         container: {
@@ -81,7 +82,7 @@ export const OrdersHistory = ({navigation}, props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getRequest('available-orders');
+                const response = await getRequest(`get-history?id=${globalID}`);
                 const data = await response.json();
                 setList(data);
             } catch (error) {

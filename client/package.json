@@ -22,7 +22,7 @@
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native": "0.72.6",
     "react-native-bouncy-checkbox": "^3.0.7",
     "react-native-custom-switch": "^1.0.7",
     "react-native-svg": "^14.0.0",

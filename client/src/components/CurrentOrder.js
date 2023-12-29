@@ -76,7 +76,7 @@ export const CurrentOrder = (props) => {
                 </View>
             </View>
             <View style={styles.infoBlock}>
-                <Text style={styles.text}> Взят {props.data.timeFrom}</Text>
+                <Text style={styles.text}> Доставить до {props.data.timeTo}</Text>
             </View>
         </View>
     )

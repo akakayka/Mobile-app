@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
 
 async function orderFinish(globalID, setIsMyOrder){
     setIsMyOrder(false)
-    await getRequest(`finish-order?id=${globalID}`)
+    await getRequest(`end-order?id=${globalID}`)
 }
 
 async function orderCancel(globalID, setIsMyOrder){
@@ -157,6 +157,7 @@ export default function OrderPage({ navigation }) {
                 <CurrentOrder
                     data={currentOrder}
                 />
+                {/*
                 <View style={styles.timeBlock}>
                     <View style={styles.time}>
                         <Text style={styles.timeTitle}>
@@ -174,7 +175,7 @@ export default function OrderPage({ navigation }) {
                             Срок доставки
                         </Text>
                     </View>
-                </View>
+                </View>*/}
                 <Text style={styles.attention}>
                     Если не успеваете доставить заказ, сообщите об этом покупателю
                 </Text>
@@ -183,6 +184,7 @@ export default function OrderPage({ navigation }) {
                         Оплата
                     </Text>
                     <View style={styles.paymentDetailsBlock}>
+                        {currentOrder.typeOfPay === 2?
                         <View style={styles.paymentStatusBlock}>
                             <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                                 <Text style={styles.paymentStatus}>
@@ -196,13 +198,32 @@ export default function OrderPage({ navigation }) {
                                     />
                                 </View>
                             </View>
+
                             <Text style={styles.paymentDetails}>
-                                Наличные
+                                 Наличные
                             </Text>
-                        </View>
+                        </View>:
+                            <View style={styles.paymentStatusBlock}>
+                                <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                                    <Text style={styles.paymentStatus}>
+                                        Оплачен
+                                    </Text>
+                                    <View style={styles.icon}>
+                                        <AttentionIcon
+                                            width={20}
+                                            height={20}
+                                            color={COLORS.darkRed}
+                                        />
+                                    </View>
+                                </View>
+
+                                <Text style={styles.paymentDetails}>
+                                    Безнал
+                                </Text>
+                            </View>}
                         <View style={styles.paymentSumBlock}>
                             <Text style={styles.paymentSum}>
-                                12 500 ₽
+                                {currentOrder.price} ₽
                             </Text>
                             <Text style={styles.paymentInfo}>
                                 Сумма заказа
@@ -218,9 +239,9 @@ export default function OrderPage({ navigation }) {
                 </Text>
                 <View style={styles.user}>
                     <Comment
-                        name={'Елизавета'}
-                        phone={'+7 950 228-13-37'}
-                        text={'Пиццу у двери положите) ещё лифт кстати не работает. Хорошего дня! Здоровья, счастья, любви.'}
+                        name={currentOrder.name}
+                        phone={currentOrder.tel}
+                        text={currentOrder.comment}
                     />
                 </View>
                 <View style={styles.button}>

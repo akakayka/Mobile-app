@@ -5,7 +5,7 @@ import {InputField} from "../../ui/InputField";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {COLORS} from "../../../constants/theme";
 import {fetchText} from "react-native-svg";
-import {useIsAuthContext, useMyContext, useMyOrderContext, useOrderContext} from "../../../globalContext";
+import {useMyContext, useMyOrderContext, useOrderContext} from "../../../globalContext";
 import {useDeliverymanContext} from "../../../UserContext";
 import getRequest from "../../../requestFunction";
 

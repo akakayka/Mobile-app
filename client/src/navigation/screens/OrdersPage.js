@@ -6,6 +6,7 @@ import SafeAreaViewAndroid from "../../components/SafeAreaViewAndroid";
 import SafeViewAndroid from "../../components/SafeAreaViewAndroid";
 import {COLORS} from "../../../constants/theme";
 import {useEffect, useState} from "react";
+import getRequest from "../../../requestFunction";
 
 
 const data = [
@@ -73,7 +74,7 @@ export default function OrdersPage({navigation}) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:8000/available-orders', { method: 'GET' });
+                const response = await getRequest('available-orders');
                 const data = await response.json();
                 setList(data);
             } catch (error) {

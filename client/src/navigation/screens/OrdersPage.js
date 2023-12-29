@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 24,
         marginBottom: 8,
+        fontWeight: "bold",
     },
     orders: {
         height: '50%'

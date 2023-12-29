@@ -9,6 +9,7 @@ import {COLORS} from "../../../constants/theme";
 import {useDeliverymanContext} from "../../../UserContext";
 import {useMyContext, useMyOrderContext, useOrderContext} from "../../../globalContext";
 import getRequest from "../../../requestFunction";
+import AttentionIcon from "../../../assets/icons/AttentionIcon";
 
 const styles = StyleSheet.create({
     container: {
@@ -40,6 +41,33 @@ const styles = StyleSheet.create({
         color: COLORS.lightGray2,
         fontSize: 14,
         marginRight: 4,
+    },
+    noOrders: {
+        fontSize: 16,
+        color: COLORS.lightGray2,
+        lineHeight: 24,
+    },
+    noCurrentOrderContainer: {
+        padding: 16,
+        backgroundColor: COLORS.primary,
+        borderRadius: 16,
+        height: 112,
+    },
+    noCurrentOrderTitleContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 8,
+    },
+    noCurrentOrderTitle: {
+        color: COLORS.white,
+        marginLeft: 8,
+        fontSize: 20,
+    },
+    noCurrentOrderText: {
+        color: COLORS.white,
+        fontSize: 16,
+        lineHeight: 24,
     }
 })
 
@@ -146,10 +174,26 @@ export default function HomePage({ navigation }) {
                         Текущий заказ
                     </Text>
                     {
-                        isMyOrder?
+                        isMyOrder ?
                             <CurrentOrder
                                 data={currentOrder}
-                            />: <Text>Возьмите заказ</Text>
+                            />
+                            :
+                            <View style={styles.noCurrentOrderContainer}>
+                                <View style={styles.noCurrentOrderTitleContainer}>
+                                    <AttentionIcon
+                                        color={COLORS.white}
+                                        height={24}
+                                        width={24}
+                                    />
+                                    <Text style={styles.noCurrentOrderTitle}>
+                                        Заказ не взят
+                                    </Text>
+                                </View>
+                                <Text style={styles.noCurrentOrderText}>
+                                    Пожалуйста, выберите заказ из списка доступных заказов
+                                </Text>
+                            </View>
                     }
                 </View>
                 <View>
@@ -175,7 +219,7 @@ export default function HomePage({ navigation }) {
 
                         </Pressable>
                     </View>
-                    : <Text>Доступных заказов нет</Text> }
+                    : <Text style={styles.noOrders}>Доступные заказы не найдены</Text> }
             </SafeAreaView>
         </ScrollView>
     );

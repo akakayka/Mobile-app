@@ -28,5 +28,6 @@ urlpatterns = [
     path('login', Login.as_view(), name='login'),
     path('set-deliveryman', SetDeliveryman.as_view(), name='set_deliveryman'),
     path('get-my-order', GetMyOrder.as_view(), name='get_order'),
-    path('get-history', GetHistoryOrders.as_view(), name='get_order')
+    path('get-history', GetHistoryOrders.as_view(), name='get_order'),
+    path('get-geo', GetGeoPos.as_view(), name='get_order'),
 ]

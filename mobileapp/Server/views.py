@@ -40,7 +40,18 @@ class GetHistoryOrders(View):
         # http://127.0.0.1:8000/get-history?id=1
 
 
-
+class GetGeoPos(View):
+    def get(self, request):
+        from geopandas.tools import geocode  # address we need to locate
+        order_id = request.GET.get('id')
+        order = Order.objects.get(id=int(order_id))
+        location = geocode('Екатеринбург ' + order.adres, provider="nominatim", user_agent='my_request')
+        point = location.geometry.iloc[0]
+        data = {}
+        data['longitude'] = point.x
+        data['latitude'] = point.y
+        return HttpResponse(json.dumps(data), content_type='application/json', headers=headers)
+        # http://127.0.0.1:8000/get-geo?id=1
 class OrderView(View):
     def get(self, request):
         order_id = request.GET.get('id')

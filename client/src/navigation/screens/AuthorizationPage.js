@@ -96,14 +96,7 @@ export const AuthorizationPage = (props) => {
             console.log(username);
             console.log(password);
 
-
-
             const res = await getRequest(`login?username=${username}&password=${password}`);
-
-
-
-
-
 
             let data = await res.json()
 

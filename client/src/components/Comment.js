@@ -1,7 +1,8 @@
 import React from "react";
-import {View, Text, Image, StyleSheet, Alert} from "react-native";
+import {View, Text, Image, StyleSheet, Alert, Platform} from "react-native";
 import {SmallButton} from "../ui/SmallButton";
 import {COLORS} from "../../constants/theme";
+import {Linking} from 'react-native';
 
 
 const styles = StyleSheet.create({
@@ -48,7 +49,25 @@ const styles = StyleSheet.create({
 
 export const Comment = (props) => {
 
-    const onPress = () => {}
+    const callNumber = phone => {
+        console.log(phone);
+        let phoneNumber = phone;
+        if (Platform.OS !== 'android') {
+            phoneNumber = `telprompt:${phone}`;
+        }
+        else  {
+            phoneNumber = `tel:${phone}`;
+        }
+        Linking.canOpenURL(phoneNumber)
+            .then(supported => {
+                if (!supported) {
+                    Alert.alert(`Phone number is not available`);
+                } else {
+                    return Linking.openURL(phoneNumber);
+                }
+            })
+            .catch(err => console.log(err));
+    };
 
     return (
         <View style={{...styles.container, ...props.style}}>
@@ -68,7 +87,7 @@ export const Comment = (props) => {
             <View style={styles.button}>
                 <SmallButton
                     title={'Позвонить покупателю'}
-                    onPress={onPress}
+                    onPress={() => {callNumber(props.phone)}}
                 />
             </View>
         </View>

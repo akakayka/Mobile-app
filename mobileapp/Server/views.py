@@ -130,7 +130,7 @@ class Login(View):
             if username == deliveryMan.login:
                 if password == deliveryMan.password:
                     print(1)
-                    return HttpResponse('1', headers=headers)
+                    return HttpResponse(deliveryMan.pk, headers=headers)
                 else:
                     print(0)
 

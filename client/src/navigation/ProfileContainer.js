@@ -8,6 +8,9 @@ import {NavigationContainer} from "@react-navigation/native";
 const Stack = createNativeStackNavigator();
 
 export const ProfileContainer = (props) => {
+    const onPress2 = () => {
+        props.onPress();
+    }
     return (
             <Stack.Navigator
                 screenOptions={{
@@ -15,8 +18,8 @@ export const ProfileContainer = (props) => {
                     header: () => false
                 }}
             >
-                <Stack.Screen name={'Back'} component={ProfilePage} onPress = {() => props.onPress()}/>
-                <Stack.Screen name={'Settings'} component={Settings} />
+                <Stack.Screen name={'Back'} component={ProfilePage} onPress = {onPress2}/>
+                {/*<Stack.Screen name={'Settings'} component={Settings} />*/}
                 <Stack.Screen name={'History'} component={OrdersHistory}/>
             </Stack.Navigator>
     );

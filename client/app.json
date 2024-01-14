@@ -30,10 +30,16 @@
         "googleMaps": {
           "apiKey": "AIzaSyAw5HTXOFErsivgVtFmY4v2K50ZTvAqsPQ"
         }
-      }
+      },
+      "package": "com.akakayka.client"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ee3436bd-8fc6-4b29-a76f-6057249858cc"
+      }
     }
   }
 }

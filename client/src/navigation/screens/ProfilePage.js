@@ -8,6 +8,8 @@ import StatisticsIcon from "../../../assets/icons/StatisticsIcon";
 import SettingsIcon from "../../../assets/icons/SettingsIcon";
 import ArrowIcon from "../../../assets/icons/Arrowicon";
 import {useDeliverymanContext} from "../../../UserContext";
+import {useNavigation} from "@react-navigation/native";
+import {useState} from "react";
 
 const styles = StyleSheet.create({
     container: {
@@ -63,8 +65,14 @@ const styles = StyleSheet.create({
     }
 })
 
-export default function ProfilePage({ navigation }) {
+export default function ProfilePage(props) {
     const { userInfo, setUserInfo } = useDeliverymanContext();
+    const navigation = useNavigation();
+    const [isAuth, setIsAuth] = useState(true);
+    const handleRestart = () => {
+        setIsAuth(!isAuth)
+    }
+
     return (
         <SafeAreaView style={[SafeAreaViewAndroid.AndroidSafeArea, styles.container]}>
             <Text style={styles.header}>
@@ -123,7 +131,7 @@ export default function ProfilePage({ navigation }) {
                             color={COLORS.primary}
                         />
                     </Pressable>
-                    <Pressable
+                    {/*<Pressable
                         onPress={() => navigation.navigate('Settings')}
                         style={styles.button}
                     >
@@ -140,9 +148,9 @@ export default function ProfilePage({ navigation }) {
                             height={24}
                             color={COLORS.primary}
                         />
-                    </Pressable>
+                    </Pressable>*/}
                     <Pressable
-                        onPress={() => {}}
+                        onPress={()=> {handleRestart()}}
                     >
                         <Text style={styles.logoutText}>
                             Выйти из аккаунта

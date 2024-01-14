@@ -23,6 +23,10 @@ const ordersName = "Orders"
 const Tab = createBottomTabNavigator();
 
 export const MainContainer = (props) => {
+    const onPress = () => {
+        props.onPress();
+        console.log('xuy1');
+    }
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -70,7 +74,7 @@ export const MainContainer = (props) => {
                 <Tab.Screen name={ordersName} component={OrdersPage} options={{
                     unmountOnBlur: true, // Добавьте эту опцию
                 }}/>
-                <Tab.Screen name={profileName} component={ProfileContainer} onPress = {() => props.onPress()} options={{
+                <Tab.Screen name={profileName} component={ProfileContainer} onPress = {onPress} options={{
                     unmountOnBlur: true, // Добавьте эту опцию
                 }}/>
 

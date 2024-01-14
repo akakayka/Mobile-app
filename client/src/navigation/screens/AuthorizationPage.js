@@ -45,10 +45,6 @@ const styles = StyleSheet.create({
     }
 })
 
-
-
-
-
 export const AuthorizationPage = (props) => {
     const {isMyOrder, setIsMyOrder} = useMyOrderContext();
     const { globalID, setGlobalID } = useMyContext();
@@ -114,8 +110,15 @@ export const AuthorizationPage = (props) => {
                     {
                         const a = await getRequest(`get-my-order?id=${data}`);
                         const b = await a.json();
+
+                        const d = await getRequest(`get-geo?id=${b[0].pk}`);
+                        console.log(d);
+                        const geo = await d.json();
+
                         console.log(data);
-                        const c = {number: b[0].pk,
+                        console.log(geo);
+                        const c = {
+                            number: b[0].pk,
                             address: b[0].fields.adres,
                             distance: b[0].fields.dop_adres,
                             timeTo: b[0].fields.time_limit,
@@ -123,7 +126,10 @@ export const AuthorizationPage = (props) => {
                             typeOfPay: b[0].fields.type_pay,
                             comment: b[0].fields.coment,
                             tel: b[0].fields.client_number,
-                            name: b[0].fields.name}
+                            name: b[0].fields.name,
+                            latitude: geo.latitude,
+                            longitude: geo.longitude,
+                        }
                         setCurrentOrder(c);
                         setIsMyOrder(true)
 
@@ -176,6 +182,7 @@ export const AuthorizationPage = (props) => {
                     focusable={true}
                     onFocus={onFocus}
                     onBlur={onBlur}
+                    secureTextEntry={true}
                 />
             </View>
             <View style={styles.button}>

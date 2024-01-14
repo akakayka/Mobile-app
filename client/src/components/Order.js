@@ -74,7 +74,12 @@ async function orderTake(props, id, setIsMyOrder, setCurrentOrder) {
         {
             const a = await getRequest(`get-my-order?id=${id}`);
             const b = await a.json()
-            const c = {number: b[0].pk,
+
+            const d = await getRequest(`get-geo?id=${b[0].pk}`);
+            const geo = await d.json();
+
+            const c = {
+                number: b[0].pk,
                 address: b[0].fields.adres,
                 distance: b[0].fields.dop_adres,
                 timeTo: b[0].fields.time_limit,
@@ -82,7 +87,10 @@ async function orderTake(props, id, setIsMyOrder, setCurrentOrder) {
                 typeOfPay: b[0].fields.type_pay,
                 comment: b[0].fields.coment,
                 tel: b[0].fields.client_number,
-                name: b[0].fields.name}
+                name: b[0].fields.name,
+                latitude: geo.latitude,
+                longitude: geo.longitude,
+            }
             setCurrentOrder(c)
             setIsMyOrder(true);
         }
